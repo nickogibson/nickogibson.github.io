@@ -1,3 +1,9 @@
+layout:home
+title "Nicko Blogs io"
+permalink:"https://nickogibson.github.io"
+---
+
+
 # Web Apps and Stuff
 - [The Dice Roller](https://nickogibson.github.io/games.io/DiceRoller/) - A d20 Dice Roller
 
