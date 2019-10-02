@@ -29,6 +29,7 @@ twitter_username: nickogibson
 github_username:  nickogibson
 
 # Build settings
+markdown: kramdown
 theme: jekyll-theme-architect
 plugins:
   - jekyll-feed
