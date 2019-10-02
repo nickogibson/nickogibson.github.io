@@ -1,3 +1,3 @@
 layout: page
 title: "Nicko's Blog"
-permalink: /Blog/
+permalink: https://nickogibson.github.io/Blog
