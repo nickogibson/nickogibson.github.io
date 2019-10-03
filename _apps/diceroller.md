@@ -2,6 +2,7 @@
 title: d20 Dice Roller
 description: A d20 diceroller with player save functions
 layout: home
+date: 2019-10-02 19:13:21 -0700
 ---
 
 
@@ -12,7 +13,7 @@ A d20 Dice Roller with player hand saving functions.
 **Want to embed the dice roller on your page?**
 
 ```markdown 
-<iframe width="100%" height="100%" src="https://nickogibson.github.io/games.io/DiceRoller"></iframe>
+<iframe width="100%" height="500px" src="https://nickogibson.github.io/games.io/DiceRoller"></iframe>
 ```
 
 - Change width and height to either a px value or desired width/height %.
