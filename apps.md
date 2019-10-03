@@ -1,6 +1,7 @@
 ---
 title: NickoGibson Apps IO
 Description: Some webapps and stuff
+permalink: /apps/
 ---
 
 {% for app in site.apps %}
