@@ -1,6 +1,6 @@
 ---
-title: NickoGibson Apps IO
-Description: Some webapps and stuff
+title: App and Stuff
+description: Some web apps and stuff
 permalink: /apps/
 ---
 
@@ -10,6 +10,6 @@ permalink: /apps/
       {{ app.title }} 
     </a>
   </h2>
-  <b> Last update: {{app.date}}</b>
-  <p>{{ app.excerpt  }}</p>
+  <b> Last update: {{ app.date }} </b>
+  <p>{{ app.excerpt  }} </p>
 {% endfor %}
