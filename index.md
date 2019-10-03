@@ -2,7 +2,7 @@
 title: Nicko Blogs io
 
 ---
-##[Blog](https://nickogibson.github.io/blog/)
+## [Blog](https://nickogibson.github.io/blog/)
 Last post: <h4>{{ site.posts[0].date}} -</h4>
 <ul>
       <li>
