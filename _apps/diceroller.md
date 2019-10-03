@@ -1,11 +1,13 @@
 ---
 title: d20 Dice Roller
 description: A d20 diceroller with player save functions
-
+layout: home
 ---
 
-A d20 Dice Roller
+
 <iframe width="100%" height="100%" src="https://nickogibson.github.io/games.io/DiceRoller"></iframe>
+
+A d20 Dice Roller with player hand saving functions.
 
 **Want to embed the dice roller on your page?**
 
