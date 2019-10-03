@@ -1,6 +1,5 @@
 ---
-layout: home
-title: "Nicko Blogs io"
+title: Nicko Blogs io
 permalink: "https://nickogibson.github.io"
 ---
 
