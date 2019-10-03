@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: home
 theme: jekyll-theme-architect
 title: Nicko's Blog
 permalink: /blog/
