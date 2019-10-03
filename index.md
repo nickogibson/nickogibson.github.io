@@ -2,11 +2,11 @@
 title: Nicko Blogs io
 
 ---
-## [Blog](https://nickogibson.github.io/blog/)
-Last post: <h4>{{ site.posts[0].date}} -</h4>
+# [Blog](https://nickogibson.github.io/blog/)
+Last post: {{ site.posts[0].date}} 
 <ul>
       <li>
-      <h3><a href="{{ site.posts[0].url }}">{{  site.posts[0].title }}</a></h3>  
+      <h2><a href="{{ site.posts[0].url }}">{{  site.posts[0].title }}</a></h2>  
       {{  site.posts[0].excerpt }}
     </li>
 </ul>
