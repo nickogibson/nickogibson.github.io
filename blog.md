@@ -3,6 +3,7 @@ title: Nicko's Blog
 Description: Recent posts
 permalink: /blog/
 ---
+<ul>
 {% for post in site.posts %}
       <li>
       <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
@@ -10,3 +11,4 @@ permalink: /blog/
       {{ post.excerpt }}
     </li>
 {% endfor %}
+</ul>
