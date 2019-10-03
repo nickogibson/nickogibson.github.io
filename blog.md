@@ -1,6 +1,6 @@
 ---
 title: Nicko's Blog
-Description: Recent posts
+description: Recent posts
 permalink: /blog/
 ---
 <ul>
