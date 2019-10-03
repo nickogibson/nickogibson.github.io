@@ -2,10 +2,19 @@
 title: Nicko Blogs io
 
 ---
+##[Blog](https://nickogibson.github.io/blog/)
+Last post: <h4>{{ site.posts[0].date}} -</h4>
+<ul>
+      <li>
+      <h3><a href="{{ site.posts[0].url }}">{{  site.posts[0].title }}</a></h3>  
+      {{  site.posts[0].excerpt }}
+    </li>
+</ul>
 
 
 # Web Apps and Stuff
-- [The Dice Roller](https://nickogibson.github.io/games.io/DiceRoller/) - A d20 Dice Roller
+### [The Dice Roller](https://nickogibson.github.io/games.io/DiceRoller/) 
+A d20 Dice Roller
 
 **Want to embed the dice roller on your page?**
 
