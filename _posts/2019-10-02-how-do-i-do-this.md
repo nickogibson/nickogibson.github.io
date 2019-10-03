@@ -3,7 +3,7 @@ title:  How do I do this?
 date:   2019-10-02 15:13:21 -0700
 categories: blog 
 ---
-#How do I do this?
+### Trying to figure it all out.
 My first blog post on Github with Jekyll.
 I'll keep some of this info for to-read.
 
