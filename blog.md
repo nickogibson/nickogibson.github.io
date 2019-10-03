@@ -1,6 +1,6 @@
 ---
 layout: page
-theme:jekyll-theme-architect
+theme: jekyll-theme-architect
 title: Nicko's Blog
 permalink: /blog/
 ---
