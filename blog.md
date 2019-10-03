@@ -9,6 +9,6 @@ permalink: /blog/
       <li>
       <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
       <h4>{{post.date}} -</h4>
-      {{ post.excerpt | markdownify }}
+      {{ post.excerpt }}
     </li>
 {% endfor %}
