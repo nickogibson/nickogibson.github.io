@@ -1,7 +1,6 @@
 ---
-layout: post
-title:  "How do I do this?"
-date:   2019-10-02 14:13:21 -0700
+title:  How do I do this?
+date:   2019-10-02 15:13:21 -0700
 categories: blog 
 ---
 #How do I do this?
