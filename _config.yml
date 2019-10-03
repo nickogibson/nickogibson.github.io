@@ -33,6 +33,10 @@ markdown: kramdown
 theme: jekyll-theme-architect
 plugins:
   - jekyll-feed
+  
+  collections:
+   - apps
+   - games
 
 # Exclude from processing.
 # The following items will not be processed, by default.
