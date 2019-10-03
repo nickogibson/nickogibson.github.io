@@ -34,11 +34,11 @@ theme: jekyll-theme-architect
 plugins:
   - jekyll-feed
   
-  collections:
-   - apps
-    output:true
-   - games
-    output:true
+collections:
+  apps
+    output: true
+  games
+    output: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.
