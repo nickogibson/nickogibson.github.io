@@ -5,7 +5,7 @@ layout: home
 ---
 
 
-<iframe width="100%" height="100%" src="https://nickogibson.github.io/games.io/DiceRoller"></iframe>
+<iframe width="100%" height="420px" src="https://nickogibson.github.io/games.io/DiceRoller"></iframe>
 
 A d20 Dice Roller with player hand saving functions.
 
