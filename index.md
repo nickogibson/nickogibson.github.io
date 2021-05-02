@@ -5,7 +5,6 @@ title: Nicko Blogs io
 
 # Video Games
 ## [A Game of Stonks (beta)](https://mverse.cloud)
-Last Commit: {{ site.games.Build.date}} 
 A game about customizing your office with NFTs. And doing some minigames (for $tonks :).
 ## [Dice Roller d20](https://kudos.itch.io/dice)
 The first webapp I made and learned a lot about html and javascript. Also upgraded the theme once and made an Android version
