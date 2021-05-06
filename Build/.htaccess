@@ -1,3 +1,0 @@
-# NOTE: "mod_mime" Apache module must be enabled for this configuration to work.
-<IfModule mod_mime.c>
-AddEncoding gzip .unityweb
