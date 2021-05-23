@@ -9,7 +9,7 @@ date: 2019-10-02 19:13:21 -0700
 <iframe width="100%" height="700px" src="https://nickogibson.github.io/games.io/DiceRoller"></iframe>
 
 A d20 Dice Roller with player hand saving functions.
-
+[source code: github.com/nickogibson/Dice-Roller](https://github.com/nickogibson/Dice-Roller)
 **Want to embed the dice roller on your page?**
 
 ```markdown 
