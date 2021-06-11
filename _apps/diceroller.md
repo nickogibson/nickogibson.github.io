@@ -38,5 +38,4 @@ If your page has black or other color background that can't see black text well.
 Adding id="diceBox" is optional but then you can change the thing in css instead.
 Then you can maybe remove the scrollbar or change the whole thing
 
-I don't plan on changing the code, but might improve or fix some bugs if I'm bored one day. 
-The IPFS version however is permanent.
+I don't plan on changing the code, even though it could be better. 
