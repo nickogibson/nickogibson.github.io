@@ -18,12 +18,12 @@ Embedding the github link.
 <iframe width="100%" height="500px" src="https://nickogibson.github.io/games.io/DiceRoller"></iframe>
 ```
 
-The slightly broken dicebox forever on ipfs:
- won't always load 6 dice at once from the cloud, and might require a page refresh to get ready.
- But if you really want to embed it you can do this:
+Or the 'slightly' broken dicebox forever on ipfs:
+ If you want to embed it you can do this:
 ```markdown 
 <iframe width="100%" height="500px" src="https://gateway.pinata.cloud/ipfs/QmWKQE5QhMMdRjXZCunpdN1fHEGmJdEWfecCvPJCw3oZ6g/"></iframe>
 ```
+ The link won't always load all 6 images from the cloud, and might require a page refresh to get ready.
 
 - Change width and height to either a px value or desired width/height %.
 - for example height="500px"
