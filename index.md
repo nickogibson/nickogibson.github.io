@@ -4,7 +4,7 @@ title: Nicko's Stuff
 ---
 
 # Video Games
-## [*new* Downhill Skater - Free Demo] (https://kudos.itch.io)
+## [Downhill Skater - Free Demo] (https://kudos.itch.io)
 Powerslide - Dodge Cars - Race down the hill.
 
 ## [A Game of Stonks](https://mverse.cloud)
@@ -23,10 +23,14 @@ Last post: {{ site.posts[0].date}}
 </ul>
 
 # Links
-[Other blog- TubeBlogger](https://tubeblogger.blogspot.com)
+
 [Twitter](https://twitter.com/NickoGibson)
+
 [YouTube](https://www.youtube.com/c/NickolaiGibson)
+
 [Discord](https://discord.gg/Nk3DFSmJwy)
+
+[My blogTubeBlogger](https://tubeblogger.blogspot.com)
 
 
 
