@@ -4,7 +4,7 @@ title: Nicko's Stuff
 ---
 
 # My Games
-## [Downhill Skater - Free Demo](https://kudos.itch.io) ![Windows](https://badgen.net/badge/icon/windows?icon=windows&label)
+## [Downhill Skater - Free Demo](https://kudos.itch.io) ![Windows](https://img.shields.io/badge/Windows-blue?logo=windows)
 ![An image of downhill skater](https://img.itch.zone/aW1nLzEwMzMzOTY0LmpwZw==/315x250%23c/DdOf47.jpg)
 
 Powerslide - Dodge Cars - Race down the hills.
