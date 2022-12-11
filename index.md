@@ -12,7 +12,9 @@ Powerslide - Dodge Cars - Race down the hills.
 ## [A Game of Stonks](https://mverse.cloud) ![webgl](https://img.shields.io/badge/WebGL-blue?logo=webgl)
 ![an image of metaverse office](https://img.itch.zone/aW1nLzU3NTM2NzEuanBn/315x250%23c/BSLT%2BX.jpg)
 
-A game about customizing your office with NFTs. And playing some minigames.
+A strange office in a city. Use the computer to find out whats going on. Plays in browser. 
+Was learning webGL & made this game for Mverse. The idea was to print NFTs and decorate the office with art. 
+but it's pretty clunkyy. Just do the quest :)
 
 ## [d20 Dice Roller on Github](https://nickogibson.github.io/apps/diceroller.html) [![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/nickogibson/Dice-Roller)
 
