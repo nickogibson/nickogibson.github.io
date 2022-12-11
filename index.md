@@ -4,10 +4,9 @@ title: Nicko's Stuff
 ---
 
 # My Games
-## [Downhill Skater - Free Demo](https://kudos.itch.io) ![Windows](https://img.shields.io/badge/Windows-blue?logo=windows)
+## [Downhill Skater - Free Demo](https://kudos.itch.io/downhill-skater) ![Windows](https://img.shields.io/badge/Windows-blue?logo=windows)
 ![An image of downhill skater](/TemplateData/Downhill_Skater_Early.jpg)
-
-Powerslide - Dodge Cars - Race down the hills.
+Race down the hill on a Longboards. Learn powerslides to control your speed. And watch out for A.I drivers!
 
 ## [A Game of Stonks](https://mverse.cloud) ![webgl](https://img.shields.io/badge/WebGL-blue?logo=webgl)
 ![an image of metaverse office](https://img.itch.zone/aW1nLzU3NTM2NzEuanBn/315x250%23c/BSLT%2BX.jpg)
