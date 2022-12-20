@@ -21,7 +21,8 @@ Was learning Unity WebGL & made this game for Mverse. The idea was you can print
 
 ![an image of diceroller](https://img.itch.zone/aW1nLzI3OTE3NTEucG5n/315x250%23c/i1mMZg.png)
 
-The first web app I made. Learned a lot of HTML and Javascript. Also made an Android version once to practice Android Studio.  
+This was the first web app I made. Learned a lot of HTML and Javascript. Also made an Android version once to practice Android Studio.
+For other simple web-apps, see my codepen ->  
 
 # [Blog](https://nickogibson.github.io/blog/)
 Last post: {{ site.posts[0].date}} 
