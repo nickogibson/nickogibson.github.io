@@ -1,5 +1,5 @@
 ---
-title:  Will AI Take Al the Jobs?
+title:  Will AI Take All the Jobs?
 date:   2023-01-09 00:00:00 -0700
 categories: blog 
 ---
@@ -21,4 +21,5 @@ Also wrote an article here about [Making Games with A.I - TubeBlogger](https://t
 What more needs to be said? I'm not going to fear monger about it, many others can do that. I did warn about this years
 ago in another blog (that) somewhere - [an AI Content Tsunami is Coming!](https://nickoblogs.blogspot.com/2019/09/an-ai-content-tsunami-is-coming.html)
 
+[artwork above: rooftop kitty, from my flickr album](https://www.flickr.com/photos/62732518@N04/albums)
 [synthetic-dawn]: https://syntheticdawn.blogspot.com
