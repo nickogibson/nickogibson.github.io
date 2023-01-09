@@ -1,6 +1,6 @@
 ---
 title:  Will AI Take Al the Jobs?
-date:   2023-01-09 12:00:00 -0700
+date:   2023-01-09 00:00:00 -0700
 categories: blog 
 ---
 ### Let's hope not.
