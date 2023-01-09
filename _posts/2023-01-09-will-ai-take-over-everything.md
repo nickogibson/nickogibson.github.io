@@ -9,7 +9,7 @@ Happy new Year, and thanks for reading my blog!
 Do people still blog? I guess I do. (And now robots do too.)
 
 I've been playing with some of the A.I models lately. It can certainly help with creating graphics and textures for my games, and now text and more as well.
-I share some of my AI stories and findings on this new blog [Synthetic Dawn][synthetic-dawn]
+I share some of my AI stories and findings on this new blog [Synthetic Dawn](https://syntheticdawn.blogspot.com)
 including links for Tools, Videos, and Stories.
 I'm not an expert so please leave a comment if there's anything I missed :)
 
@@ -21,5 +21,4 @@ Also wrote an article here about [Making Games with A.I - TubeBlogger](https://t
 What more needs to be said? I'm not going to fear monger about it, many others can do that. I did warn about this years
 ago in another blog (that) somewhere - [an AI Content Tsunami is Coming!](https://nickoblogs.blogspot.com/2019/09/an-ai-content-tsunami-is-coming.html)
 
-[artwork above: rooftop kitty, from my flickr album](https://www.flickr.com/photos/62732518@N04/albums)
-[synthetic-dawn]: https://syntheticdawn.blogspot.com
+Artwork [Rooftop Kitty, from my flickr album](https://www.flickr.com/photos/62732518@N04/albums)
