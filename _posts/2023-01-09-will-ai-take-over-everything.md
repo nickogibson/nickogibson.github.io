@@ -1,9 +1,10 @@
 ---
-title:  Will A.I Take All the Jobs?
+title:  Will AI Take Over Everything?
 date:   2023-01-09 12:00:00 -0700
 categories: blog 
 ---
-### Let's Hope not
+### Will A.I Take All the Jobs?
+Let's hope not.
 Happy new Year, and thanks for reading my blog!
 ![rooftop cat artwork](https://live.staticflickr.com/65535/52380387701_01b8cd1838_o.jpg)
 Do people still blog? I guess I do. (And now robots do too.)
