@@ -17,7 +17,7 @@ A strange office in a strange city. Use the computer to find out whats going on.
 Was learning Unity WebGL & made this game for Mverse. The idea was you can print NFTs (for free:) and decorate the office with art. 
 . Or just do the quest.
 
-## [d20 Dice Roller on Github](https://nickogibson.github.io/apps/diceroller.html)![HTML5](https://img.shields.io/badge/html5-blue?logo=html5)
+## [d20 Dice Roller on Github](https://nickogibson.github.io/apps/diceroller.html)![html5](https://img.shields.io/badge/HTML5-blue?logo=html5)
 
 ![an image of diceroller](https://img.itch.zone/aW1nLzI3OTE3NTEucG5n/315x250%23c/i1mMZg.png)
 
