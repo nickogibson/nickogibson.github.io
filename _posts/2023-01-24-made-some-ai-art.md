@@ -21,3 +21,5 @@ Follow my [public Facebook](https://www.facebook.com/nicko.gibson) where I share
 ### A digital book
 This bathroom reader is not in print, but you can get the Digital Version [on Amazon](https://a.co/d/ixcwl32)
 ![bathroom book cover](/TemplateData/flush_with knowledge-bathroom-reader-ebook_n.jpg)
+
+Recent Post: [Will AI Take Over Everything?](https://nickogibson.github.io/blog/2023/01/09/will-ai-take-over-everything.html)
