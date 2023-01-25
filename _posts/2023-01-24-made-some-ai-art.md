@@ -6,8 +6,9 @@ categories: blog
 ### With some help from AI.
 I turned some of my cartoons into a coloring book.
 ![coloring book cover](/TemplateData/anime_coloring_book_cover1.jpg)
-![coloring book cover](/TemplateData/anime_coloring_book_cover2.jpg)
 [Get it on Amazon](https://a.co/d/fji8kSw)
+![coloring book cover](/TemplateData/anime_coloring_book_cover2.jpg)
+
 
 If you want to use any of my graphics or stock photos, check my albums!
 
