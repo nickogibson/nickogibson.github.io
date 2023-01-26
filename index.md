@@ -25,7 +25,7 @@ This was the first web app I made. Learned a lot of HTML and Javascript. Also ma
 For other simple web-apps, see my codepen in the sidebar ->  
 
 # [Blog](https://nickogibson.github.io/blog/)
-Last Post: stardate {{ site.posts[0].date}} 
+Stardate: {{ site.posts[0].date}} 
 <ul>
       <li>
       <h2><a href="{{ site.posts[0].url }}">{{  site.posts[0].title }}</a></h2>  
