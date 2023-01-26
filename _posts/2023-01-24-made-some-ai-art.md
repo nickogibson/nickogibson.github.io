@@ -4,13 +4,14 @@ date:   2023-01-24 14:00:00 -0700
 categories: blog 
 ---
 If you want to use any of my graphics or stock photos, check my albums and let me know! 
+![character design images](/TemplateData/character-artwork.jpg)
+Follow my [public Facebook](https://www.facebook.com/nicko.gibson) where I share a few tips and such.
 
 Stock photos, non commercial: [my flickr albums](https://www.flickr.com/photos/62732518@N04/albums)
 
 Stock photos, commercial : [my Adobe album](https://stock.adobe.com/contributor/211188035/Nicko)
 
-Follow my [public Facebook](https://www.facebook.com/nicko.gibson) where I share a few tips and such.
-![character design images](/TemplateData/character-artwork.jpg)
+
 ### With some help from AI.
 I turned some of my cartoons into a coloring book.
 ![coloring book cover](/TemplateData/anime_coloring_book_cover1.jpg)
