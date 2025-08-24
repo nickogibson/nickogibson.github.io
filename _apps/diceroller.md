@@ -6,29 +6,86 @@ date: 2019-10-02 19:13:21 -0700
 ---
 
 
-<iframe width="100%" height="700px" src="https://nickogibson.github.io/app/DiceRoller/"></iframe>
+<div 
+	class="diceBox_container" 
+	style="width: 100%; aspect-ratio: 4 / 3; background-color: #FFFFFF;">
+	<iframe height="100%"  width="100%" src="https://nickogibson.github.io/app/DiceRoller/" title="d20 Dice Roller"></iframe>
+</div>
 
 A d20 Dice Roller with player hand saving functions.
 [source code: github.com/nickogibson/Dice-Roller](https://github.com/nickogibson/Dice-Roller)
-**Want to embed the dice roller on your page?**
-The diceroller is hosted on github, and on IPFS as a test of what was possible.
 
-Embedding the github link.
-```markdown 
-<iframe width="100%" height="500px" src="https://nickogibson.github.io/app/DiceRoller/"></iframe>
+**Want to embed the dice roller on your page?**
+The diceroller is hosted on github
+
+Embedding:
+```html 
+<iframe 
+  src="https://nickogibson.github.io/app/DiceRoller/" 
+  title="d20 Dice Roller" 
+  style="width: 100%; aspect-ratio: 4 / 3; border: none;">
+</iframe>
 ```
 
 - Change width and height to either a px value or desired width/height %.
 - for example height="500px"
 - 100% is the mobile friendly version.
 
-If your page has black or other color background that can't see black text well. You'll have to style the dicebox differently. For example
+**Styling**
 
-```markdown
-<div id="diceBox" width="100%" style="background-color: #FFFFFF; height:500px;"><iframe height="100%"  width="100%" src="https://nickogibson.github.io/games.io/DiceRoller"></iframe></div>
+If your page has black background or other color that can't see the text well. You'll have to style the dicebox differently. For example
+
+```html
+<div 
+	class="diceBox_container" 
+	style="width: 100%; aspect-ratio: 4 / 3; 
+	background-color: transparent;
+	color: #eee;">
+	<iframe height="100%"  width="100%" src="https://nickogibson.github.io/app/DiceRoller/" title="d20 Dice Roller"></iframe>
+</div>
 ```
 
-Adding id="diceBox" is optional but then you can change the thing in css instead.
-Then you can maybe remove the scrollbar or change the whole thing
+Then you can change the thing in CSS however you want.
 
-I don't plan on changing the code, even though it could be better. 
+Example:
+```css
+diceBox_container {
+  background-color: #333; /* Dark background */
+  color: #eee; /* Light text */
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+/* Style the main title */
+h1 {
+  color: #ffc107; /* Amber color */
+  font-size: 3em;
+  text-shadow: 2px 2px #000;
+}
+
+/* Style the results area */
+#rolls {
+  background-color: #222;
+  border: 1px solid #555;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #4CAF50; /* Green for success! */
+  min-height: 50px;
+  margin: 10px 0;
+}
+
+/* Style the roll button */
+.rollButtons {
+  background-color: #673ab7; /* Deep purple */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.2s; /* Smooth transition on hover */
+}
+```
