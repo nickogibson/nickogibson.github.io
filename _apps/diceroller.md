@@ -45,47 +45,27 @@ If your page has black background or other color that can't see the text well. Y
 </div>
 ```
 
-Then you can change the thing in CSS however you want.
+Then you can style  the thing in CSS however you want.
 
 Example:
 ```css
 diceBox_container {
   background-color: #333; /* Dark background */
   color: #eee; /* Light text */
-  font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
 /* Style the main title */
 h1 {
   color: #ffc107; /* Amber color */
   font-size: 3em;
-  text-shadow: 2px 2px #000;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
 /* Style the results area */
 #rolls {
   background-color: #222;
-  border: 1px solid #555;
-  border-radius: 8px;
-  padding: 15px;
-  text-align: center;
   font-size: 2.2em;
   font-weight: bold;
-  color: #4CAF50; /* Green for success! */
-  min-height: 50px;
-  margin: 10px 0;
-}
-
-/* Style the roll button */
-.rollButtons {
-  background-color: #673ab7; /* Deep purple */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  font-size: 1.2em;
-  cursor: pointer;
-  margin: 5px;
-  transition: background-color 0.2s; /* Smooth transition on hover */
+  color: #4CAF50; /
 }
 ```
