@@ -103,7 +103,7 @@ function addPlayer(PlayerName){
             playerDiv.appendChild(playerNode);
             playerDiv.appendChild(deleter);
             //Load Player
-            playerNode.onclick=function(){
+            playerDiv.onclick=function(){
                 clearHand();
                 document.getElementById("handName").innerHTML = this.innerHTML;
                 //var _name = PlayerName;

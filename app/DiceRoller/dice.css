@@ -1,19 +1,17 @@
-
 body{
-//width:100%;
-//height:100%;
+
 font-size : 20px;
 font-family: 'Yanone Kaffeesatz', sans-serif;
-//font:normal normal 30px Yanone Kaffeesatz;
+
 
 }
 
 h1{
 font-size : 7.5vw;
 align: center;
-//text-transform: uppercase;
+/*text-transform: uppercase;*/
 color:sienna;
-//background: #FFFFFF;
+/*background: #FFFFFF;*/
 text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
 
 }
@@ -24,10 +22,10 @@ text-align:center;
 
 #handOuter{
  	max-width:100%;
- 	//margin-bottom:1%;
+
     margin-top:2%;
-    	position:sticky;
-    	top:2px;
+    position:sticky;
+    top:2px;
 }
 #hand{
     display: block;
@@ -41,8 +39,8 @@ text-align:center;
 
 	text-indent: 5px;
     z-index:999;
-   // text-justify: inter-word;
-
+/*  text-justify: inter-word;
+*/
 	-moz-box-shadow: 0px -5px 5px 5px #888;
 	-webkit-box-shadow: 0px -5px 5px 5px#888;
 	box-shadow: 0px -5px 5px 5px #888;
@@ -58,7 +56,7 @@ overflow:hidden;
   background: #fff1cf;
   white-space: nowrap;
 text-overflow: ellipsis;
-  // -webkit-background-clip: text;
+/* -webkit-background-clip: text;*/
 
 }
 
@@ -67,14 +65,7 @@ text-overflow: ellipsis;
 font-size: 4.5vw;
 }
 
-#handColon{
-//display:table-cell;
-//column-width:3px;
-//align:left;
-}
-#handColon td{
-//column-width:3px;
-}
+
 
 #saved{
 position:relative;
@@ -90,25 +81,26 @@ background: lightgreen;
 }
 
 #modifiers{
-    //position : absolute;
-    font-size : 15dp;
+
+    font-size : 15px;
     display:table-cell;
     vertical-align: middle;
-
+ 
     cursor:pointer;
-    //width:10.5vw;
-    //max-width:17%;
     border-style: none double outset double;
-    //text-indent:3px;
     text-align:center;
-    //padding-left:-2px;
-    margin-left:20px;
-    background:teal;
+    margin-left:40px;
+ 
     z-index:1000;
+}
+#modsOuter {
+    margin: 0 auto;
+    width: 15% ;
+
 }
 
 #modifiers table{
-padding-left:10px;
+padding-left:15px;
 }
 
 #modsWrapper{
@@ -116,29 +108,28 @@ horizontal-align:middle;
 margin:auto;
 }
 input[type=number]{
-//display:inherit;
+
 width:20vw;
 max-width: 23%
 }
 
-#modsButton{
-//display:inherit;
-}
 
-#playersContainer{
+
+#playersContainer {
+    display: none;
+    position: sticky;
+    top: 2px;
     float:right;
-    display:none;
-    position: absolute;
-    right:1%;
-    margin-top:7px;
-    z-index:998;
-    width:97%;
-    height:98%;
-    max-width:300px;
-    max-height:500px;
-    //overflow:auto;
+    /*position: fixed;*/ /* Changed to fixed */
+    /*top: 0;*/ /* Added to position at the top of the viewport */
+    /*left: 75%;*/ /* Added to position at the left of the viewport */
+    margin-bottom: 0px; /* Removed to prevent pushing content down */
 
-::-webkit-scrollbar {
+    width: 97%;
+    height: 98%;
+    max-width: 300px;
+    max-height: 500px;
+    :: -webkit-scrollbar {
   width: 10px;
 }
 
@@ -156,7 +147,7 @@ max-width: 23%
 }
 
 #closeWindow{
-    text-align:left;
+    text-align:right;
     display:inherit;
     z-index:999;
     background-color:#f9f9f9;
@@ -172,7 +163,7 @@ max-width: 23%
 text-align:center;
 margin:auto;
 display:inherit;
-margin-bottom:-15px;
+margin-bottom:-20px;
 clear:both;
 }
 
@@ -194,7 +185,6 @@ z-index:999;
 }
 
 .playerDiv{
-//display:inline;
 margin-left:1vw;
 text-align:center;
 overflow:hidden;
@@ -219,11 +209,9 @@ margin-left:3%;
 
 #diceBoxLabel{
 font-size : 15dp;
-//display:inline;
 width:30%;
 cursor:pointer;
 border-style: outset double none double;
-//text-indent:3px;
 text-align:center;
 padding-left:-2px;
 margin:auto;
@@ -233,7 +221,6 @@ background:teal;
 
 #boxDragger{
 display:inline;
-//margin-top:10px;
 }
 
 #arrows1{
@@ -248,11 +235,9 @@ padding-top:7px;
 }
 
 #boxOuterWrapper{
-width: 100%;
+    width: 100%;
     position:relative;
- //   display:table;
     margin: auto;
- //   padding:0 0 0 -10px;
     max-width: 520px;
     max-height:98%;
 
@@ -282,7 +267,6 @@ width: 100%;
     width:15px;
     height:80px;
     text-align:center;
-    //margin-right:30px;
     margin-top:125px;
     background:grey;
 }
@@ -316,16 +300,7 @@ max-width:70px;
 float:right;
 }
 
-#menu{
-    position:sticky;
-    top:1px;
-    width: 95%;
-    //max-width: 320px;
-   // margin: auto;
-    text-align: center;
-    margin-top:1%;
-    margin-bottom:1%;
-}
+
 
 .rollButtons{
 	-moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
@@ -335,11 +310,9 @@ float:right;
 	-webkit-border-radius:6px;
 	border-radius:6px;
 	border:1px solid sienna;
-//	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-//	font-size:1.7vw;
 	font-weight:bold;
 	padding:4px 18px;
 	text-decoration:none;
@@ -351,24 +324,25 @@ float:right;
 	top:1px;
 }
 
-#roll{
-    display:none;
-    position:relative;
-    height:100%;
-    max-height:100%;
-    text-align:center;
-    text-shadow:0px 1px 0px #528009;
+#roll {
+    display: none;
+    position: relative;
+    height: 100%;
+    max-height: 100%;
+    text-align: center;
+    text-shadow: 0px 1px 0px #528009;
     vertical-align: middle;
     float: right;
-    border:1px solid green;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #89c403), color-stop(1, #77a809));
-	background:-moz-linear-gradient(top, #89c403 5%, #77a809 100%);
-	background:-webkit-linear-gradient(top, #89c403 5%, #77a809 100%);
-	background:-o-linear-gradient(top, #89c403 5%, #77a809 100%);
-	background:-ms-linear-gradient(top, #89c403 5%, #77a809 100%);
-	background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809',GradientType=0);
-	background-color:#89c403;
+
+    border: 1px solid green;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #89c403), color-stop(1, #77a809));
+    background: -moz-linear-gradient(top, #89c403 5%, #77a809 100%);
+    background: -webkit-linear-gradient(top, #89c403 5%, #77a809 100%);
+    background: -o-linear-gradient(top, #89c403 5%, #77a809 100%);
+    background: -ms-linear-gradient(top, #89c403 5%, #77a809 100%);
+    background: linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809',GradientType=0);
+    background-color: #89c403;
 }
 
 #roll:hover{
@@ -382,12 +356,13 @@ float:right;
 	background-color:#77a809;
 }
 
-#newHand, #loadHand{
-color:black;
+#newHand, #loadHand {
+    color: black;
+
 }
-#newHand{
+/*#newHand{
 float:left;
-}
+}*/
 
 #loadHand{
 float:right;
@@ -409,7 +384,6 @@ color:green;
 
 #rolling hr{
    display: block;
-   //margin:auto;
    width:90vw;
 
 }
@@ -428,7 +402,6 @@ text-indent:0%;
 
    /*css specific to small screens under Xpx width here*/
     #hand{
- //   height:6.5vh;
     }
     .handItem{
 
@@ -441,6 +414,8 @@ text-indent:0%;
 
    }
 
+
+ 
    #modifiers, #diceBoxLabel{
    	font-size:3.5vw;
    	height:20px;
@@ -466,10 +441,9 @@ text-indent:0%;
 
 @media screen and (max-width: 800px) {
 
-   #modifiers{
-        font-size : 12dp;
-    //    width:12.5vw;
-    //    max-width:20%;
+    #modifiers {
+        font-size: 12dp;
+
     }
 
     #diceMenuScaler{
@@ -477,7 +451,6 @@ text-indent:0%;
     }
     #boxOuterWrapper{
         display:block;
-        //margin:none;
     }
 
     #playersContainer{
