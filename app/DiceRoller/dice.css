@@ -1,9 +1,7 @@
-body{
-
-font-size : 20px;
-font-family: 'Yanone Kaffeesatz', sans-serif;
-
-
+body {
+    color: #eeeeee;
+    font-size: 20px;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
 h1{
@@ -16,8 +14,9 @@ text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
 
 }
 
-#description{
-text-align:center;
+#description {
+    text-align: center;
+    color: black; 
 }
 
 #handOuter{
@@ -27,23 +26,23 @@ text-align:center;
     position:sticky;
     top:2px;
 }
-#hand{
+#hand {
     display: block;
-	background-color: #fff1cf;
-    position:relative;
-	max-width:100%;
-	height: 15%;
-	max-height:80px;
-	min-height:35px;
-	text-align:center;
-
-	text-indent: 5px;
-    z-index:999;
-/*  text-justify: inter-word;
+    background-color: #fff1cf;
+    position: relative;
+    max-width: 100%;
+    height: 15%;
+    max-height: 80px;
+    min-height: 35px;
+    text-align: center;
+    color: #000000;
+    text-indent: 5px;
+    z-index: 999;
+    /*  text-justify: inter-word;
 */
-	-moz-box-shadow: 0px -5px 5px 5px #888;
-	-webkit-box-shadow: 0px -5px 5px 5px#888;
-	box-shadow: 0px -5px 5px 5px #888;
+    -moz-box-shadow: 0px -5px 5px 5px #888;
+    -webkit-box-shadow: 0px -5px 5px 5px#888;
+    box-shadow: 0px -5px 5px 5px #888;
 }
 
 #handName{
@@ -85,7 +84,7 @@ background: lightgreen;
     font-size : 15px;
     display:table-cell;
     vertical-align: middle;
- 
+    color:#000000;
     cursor:pointer;
     border-style: none double outset double;
     text-align:center;
@@ -112,7 +111,6 @@ input[type=number]{
 width:20vw;
 max-width: 23%
 }
-
 
 
 #playersContainer {
@@ -376,16 +374,17 @@ color:green;
 
 }
 
-#rolling p{
-   display: table;
-   margin:auto;
-   border-spacing: 5px;
+#rolling p {
+    display: table;
+    margin: auto;
+    border-spacing: 5px;
+    color: black;
 }
 
 #rolling hr{
    display: block;
    width:90vw;
-
+   color:black;
 }
 
 .rolledName{
@@ -401,7 +400,7 @@ text-indent:0%;
 @media screen and (max-width: 468px) {
 
    /*css specific to small screens under Xpx width here*/
-    #hand{
+    #hand {
     }
     .handItem{
 
