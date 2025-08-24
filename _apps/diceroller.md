@@ -39,33 +39,8 @@ If your page has black background or other color that can't see the text well. Y
 <div 
 	class="diceBox_container" 
 	style="width: 100%; aspect-ratio: 4 / 3; 
-	background-color: transparent;
-	color: #eee;">
-	<iframe height="100%"  width="100%" src="https://nickogibson.github.io/app/DiceRoller/" title="d20 Dice Roller"></iframe>
+	background-color: white;
+	color: black;">
+	<iframe height="100%"  width="100%" src="https://nickogibson.github.io/app/DiceRoller/" title="d20 Dice Roller" ></iframe>
 </div>
-```
-
-Then you can style  the thing in CSS however you want.
-
-Example:
-```css
-diceBox_container {
-  background-color: #333; /* Dark background */
-  color: #eee; /* Light text */
-}
-
-/* Style the main title */
-h1 {
-  color: #ffc107; /* Amber color */
-  font-size: 3em;
-  font-family: 'Yanone Kaffeesatz', sans-serif;
-}
-
-/* Style the results area */
-#rolls {
-  background-color: #222;
-  font-size: 2.2em;
-  font-weight: bold;
-  color: #4CAF50; /
-}
 ```
