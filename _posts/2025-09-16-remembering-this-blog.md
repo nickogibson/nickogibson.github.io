@@ -9,6 +9,7 @@ What's new recently? The game cosmic storm on kudos.itch.io is the latest live g
 It was a fun little project to learn the Godot engine.  
 Some new 3D objects on my sketchfab. Not everything is a.i, I made the food items from scratch to practice.  
 Text to 3D generation is getting pretty good, I'm using Meshy, but the main thing I need, clothing for my characters, is still very tough to do.
+``
 
 # For those who love the sun
 I like making sun related swag, check this out, from my [RedBubble Shop](https://www.redbubble.com/people/NickoGibson/shop).
