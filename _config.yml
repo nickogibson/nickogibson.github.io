@@ -44,6 +44,8 @@ collections:
     output: true
   games:
     output: true
+# Disable excerpts on the blog front page
+show_excerpts: false
 
 # Exclude from processing.
 # The following items will not be processed, by default.
