@@ -18,7 +18,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
-    cursor: pointer; /* Indicates the image is clickable */
+    cursor: pointer;
   }
   .image-grid img:hover {
     transform: scale(1.05);
@@ -29,7 +29,6 @@
     color: #555;
     font-family: sans-serif;
   }
-
   /* Modal/Popup Styles */
   .modal-overlay {
     position: fixed;
@@ -38,24 +37,32 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.9);
-    display: none; /* Hidden by default */
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    /* Added to hide by default with JS */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
   }
-  .modal-overlay:target {
-    display: flex; /* Show the modal when its ID is in the URL */
+  .modal-overlay.visible {
+    visibility: visible;
+    opacity: 1;
   }
   .modal-content {
     position: relative;
-    /* This section ensures the image is not bigger than the window */
-    max-width: 90vw; /* 90% of the viewport width */
-    max-height: 90vh; /* 90% of the viewport height */
+    max-width: 95%; /* Adjusted for better fit */
+    max-height: 95%; /* Adjusted for better fit */
     animation: zoomIn 0.3s ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .modal-content img {
     max-width: 100%;
     max-height: 100%;
+    object-fit: contain; /* Ensures the image fits without cropping */
     display: block;
   }
   .modal-close {
@@ -69,38 +76,67 @@
     cursor: pointer;
     text-decoration: none;
   }
-  .modal-close:hover, .modal-close:focus {
+  .modal-close:hover,
+  .modal-close:focus {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
   }
   @keyframes zoomIn {
-    from { transform: scale(0.5); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    from {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 </style>
 
 <ul class="image-grid">
-  {% assign images = include.images | split: ',' %}
-  {% for image_name in images %}
-    {% assign clean_name = image_name | strip %}
-    {% assign alt_text = clean_name | remove: '.jpg' | remove: '.JPG' | replace: '-', ' ' | capitalize %}
-    <li>
-      <a href="#modal-{{ forloop.index }}">
-        <img src="{{ site.baseurl }}/TemplateData/{{ clean_name }}" alt="{{ alt_text }}">
-      </a>
-      <p class="caption">{{ alt_text }}</p>
-    </li>
+  {% assign images = include.images | split: ',' %} {% for image_name in images %}
+  {% assign clean_name = image_name | strip %}
+  {% assign alt_text = clean_name | remove: '.jpg' | remove: '.JPG' | replace: '-', ' ' | capitalize %}
+  <li>
+    <a href="javascript:void(0)" onclick="openModal('{{ site.baseurl }}/TemplateData/{{ clean_name }}', '{{ alt_text }}')">
+      <img src="{{ site.baseurl }}/TemplateData/{{ clean_name }}" alt="{{ alt_text }}" />
+    </a>
+    <p class="caption">{{ alt_text }}</p>
+  </li>
   {% endfor %}
 </ul>
 
-{% for image_name in images %}
-  {% assign clean_name = image_name | strip %}
-  {% assign alt_text = clean_name | remove: '.jpg' | remove: '.JPG' | replace: '-', ' ' | capitalize %}
-  <div id="modal-{{ forloop.index }}" class="modal-overlay">
-    <div class="modal-content">
-      <a href="#" class="modal-close">&times;</a>
-      <img src="{{ site.baseurl }}/TemplateData/{{ clean_name }}" alt="{{ alt_text }}">
-    </div>
+<div id="image-modal" class="modal-overlay">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <img id="modal-image" src="" alt="" />
   </div>
-{% endfor %}
+</div>
+
+<script>
+  const modal = document.getElementById('image-modal');
+  const modalImage = document.getElementById('modal-image');
+
+  function openModal(imageSrc, altText) {
+    modal.classList.add('visible');
+    modalImage.src = imageSrc;
+    modalImage.alt = altText;
+    document.body.style.overflow = 'hidden'; // Prevents background scrolling
+  }
+
+  function closeModal() {
+    modal.classList.remove('visible');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Close modal when clicking outside the image content
+  modal.addEventListener('click', closeModal);
+
+  // Close modal when Escape key is pressed
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' || event.key === 'Esc') {
+      closeModal();
+    }
+  });
+</script>
