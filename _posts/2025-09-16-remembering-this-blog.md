@@ -4,16 +4,24 @@ excerpt: "New game and stuff"
 date: 2025-09-16 20:36:02 -0700
 categories: blog
 ---
-It has been a while since I updated this page.  
+It has been a while since I updated this page.  Trying something new with the theme.  
+
+What I've been up to lately:  
   
-## [Cosmic Storm](https://kudos.itch.io/cosmic-storm) is my latest live game.  
-It was a fun little project to learn the Godot engine.  
-Some new 3D objects on my [sketchfab](https://sketchfab.com/nickogibson). Not everything is a.i, I made the food items from scratch to practice.  
-Text to 3D generation is getting pretty good, I'm using Meshy, but the main thing I need is clothing for my characters, which is still very tough to do.
+## 👾 [Cosmic Storm](https://kudos.itch.io/cosmic-storm) is my latest game.  
+It was a fun little project to learn the Godot engine. 
+<iframe frameborder="0" src="https://itch.io/embed/3550962" width="208" height="167"><a href="https://kudos.itch.io/cosmic-storm">Cosmic Storm by Kudos Games</a></iframe>  
+    
+I'm currently working on a much bigger project; A secret game world with unique procedural A.I features :D  
+You'll have to join my discord for sneak peeks .
 
+## 🔉 The [SFX Mixer](https://nickogibson.github.io/SFX-Mixer/)?
+A tool to generate sound effects that plays in the browser.  
 
-# For those who love the sun
-I like making sun related swag, check this out, from my [RedBubble Shop](https://www.redbubble.com/people/NickoGibson/shop).
+Might be useful for someone making a browser game or interactive website.  
+
+# ☀️ For those who Love the Sun
+I like designing solar swag, check this out, from my [RedBubble Shop](https://www.redbubble.com/people/NickoGibson/shop).
 
 {% include image-grid.html images =
   "kokopelli-throw-pillow.jpg,
@@ -24,12 +32,6 @@ I like making sun related swag, check this out, from my [RedBubble Shop](https:/
   dark sun praise-essential-t-shirt.jpg"
 %}
 
-## 🌞 <a href="https://linktr.ee/sundawgs">Praise the Sun with Sundawgs</a>  
-My collection of music, artwork, books, and more.
+## 🌞 <a href="https://linktr.ee/sundawgs">Praise the Sun More!</a>  
+A collection of sunshine music, artwork, books. Your mom would love it!
 
-## Did you come here for the [SFX Mixer](https://nickogibson.github.io/SFX-Mixer/)?
-<div
-	class="MixerContainer"
-	style="width: 100%; aspect-ratio: 4 / 3;">
-	<iframe height="100%"  width="100%" src="https://nickogibson.github.io/SFX-Mixer/" title="SFX Mixer"></iframe>
-</div>  

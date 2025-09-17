@@ -6,12 +6,12 @@ title: Nicko's Stuff
 Stardate: {{ site.posts[0].date}} 
 <ul>
       <li>
-      <h2><a href="{{ site.posts[0].url }}">{{  site.posts[0].title }}</a></h2>  
+      <h2>{{site.posts[0].title }}</h2>  
       {{  site.posts[0].content }}
     </li>
 </ul>
 
-# My Games
+# 🎮 Play my Games
 ## [Downhill Skater - Free Demo](https://kudos.itch.io/downhill-skater) [![Made with Unity](https://img.shields.io/badge/Made%20with-Unity-57b9d3.svg?style=plastic&logo=unity)](https://unity3d.com)
 ![An image of downhill skater](/TemplateData/Downhill_Skater_Early.jpg)
 
