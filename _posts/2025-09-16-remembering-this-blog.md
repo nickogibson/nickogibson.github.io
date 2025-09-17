@@ -16,7 +16,7 @@ I like making sun related swag, check this out , from my <a href="https://www.r
 {% include image-grid.html images = 
   "kokopelli-throw-pillow.jpg,
   kokopelli-throw-pillow 2.jpg,
-  kokopelli work-173909960-graphic-t-shirt.jpg,
+  kokopelli-t-shirt.jpg,
   solar-clock.jpg,
   sol invictus-classic-t-shirt.jpg,
   dark sun praise-essential-t-shirt.jpg"
