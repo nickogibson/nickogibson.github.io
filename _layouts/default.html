@@ -25,7 +25,7 @@
     <!-- The canvas container is now a background layer for the whole page -->
     <div id="cityscape-canvas-container"></div>
 
-    <!-- The theme's original header. We will make this transparent. -->
+    <!-- The theme's original header has to go. -->
     <header></header>
 
     <div id="content-wrapper">
@@ -70,109 +70,68 @@
           
           starSeed = p.floor(p.random(1000));
           zeppelinX = p.width / 2;
-          zeppelinY = p.height * 0.2; // Adjusted for full screen
+          zeppelinY = p.height * 0.2;
           zeppelinDirection = 0.5;
-
-          buildingData = [
-            { w: p.width * 0.1, h: p.random(150, 250) }, { w: p.width * 0.08, h: p.random(180, 280) },
-            { w: p.width * 0.12, h: p.random(120, 220) }, { w: p.width * 0.09, h: p.random(200, 300) },
-            { w: p.width * 0.13, h: 400 }, // Clock tower
-            { w: p.width * 0.1, h: p.random(220, 320) }, { w: p.width * 0.12, h: p.random(150, 250) },
-            { w: p.width * 0.09, h: p.random(180, 280) }, { w: p.width * 0.1, h: p.random(160, 260) },
-          ];
           
-          let totalWidth = buildingData.reduce((acc, b) => acc + b.w, 0);
-          let currentX = (p.width - totalWidth) / 2;
-          buildingData.forEach(b => {
-              b.x = currentX;
-              currentX += b.w;
-              b.windows = generateWindows(p.floor(b.h / 15), p.floor(b.w / 15));
-          });
+          createCityscape();
           
           setInterval(() => {
             nameplateText = (nameplateText === "Nicko G.") ? "Don't Panic" : "Nicko G.";
           }, 4000);
         };
         
-        p.windowResized = function() {
-            p.resizeCanvas(p.windowWidth, p.windowHeight);
-            // Re-calculate building positions on resize
-            let totalWidth = buildingData.reduce((acc, b) => acc + b.w, 0);
-            let currentX = (p.width - totalWidth) / 2;
-            buildingData.forEach(b => {
-                b.x = currentX;
+        function createCityscape() {
+            buildingData = []; // Clear old data
+            const maxCityWidth = p.min(1200, p.width * 0.9); // City is max 1200px or 90% of screen
+            const buildingWidths = [0.1, 0.08, 0.12, 0.09, 0.13, 0.1, 0.12, 0.09, 0.1];
+            
+            let currentX = (p.width - maxCityWidth) / 2;
+
+            buildingWidths.forEach((widthPercent, index) => {
+                let b = { x: currentX, w: maxCityWidth * widthPercent };
+                // Make clock tower (5th building) the tallest
+                b.h = (index === 4) ? 400 : p.random(150, 320);
+                b.windows = generateWindows(p.floor(b.h / 15), p.floor(b.w / 15));
+                buildingData.push(b);
                 currentX += b.w;
             });
+        }
+
+        p.windowResized = function() {
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
+            createCityscape(); // Re-create the city with new dimensions
         }
 
         p.draw = function() {
           let currentTime = p.hour() + p.minute() / 60 + p.second() / 3600;
 
           drawSkyGradient(currentTime);
-
           if (currentTime < 6 || currentTime >= 18) drawStars();
-          
           drawSunAndMoon(currentTime);
           drawCityscape(currentTime);
           drawZeppelin();
         };
 
         function drawSkyGradient(currentTime) {
-            const nightTop = p.color(0, 0, 0);
-            const nightBottom = p.color(25, 25, 112);
-            const sunriseTop = p.color(252, 228, 236);
-            const sunriseBottom = p.color(255, 165, 0);
-            const morningTop = p.color(135, 206, 250);
-            const morningBottom = p.color(240, 255, 255);
-            const middayTop = p.color(0, 191, 255);
-            const middayBottom = p.color(173, 216, 230);
-            const eveningTop = p.color(255, 69, 0);
-            const eveningBottom = p.color(139, 69, 19);
-            const sunsetTop = p.color(255, 140, 0);
-            const sunsetBottom = p.color(218, 112, 214);
-            let c1, c2;
-            if (currentTime >= 0 && currentTime < 5) { c1 = nightTop; c2 = nightBottom; }
-            else if (currentTime >= 5 && currentTime < 7) { let amt = p.map(currentTime, 5, 7, 0, 1); c1 = p.lerpColor(nightTop, sunriseTop, amt); c2 = p.lerpColor(nightBottom, sunriseBottom, amt); }
-            else if (currentTime >= 7 && currentTime < 11) { let amt = p.map(currentTime, 7, 11, 0, 1); c1 = p.lerpColor(sunriseTop, morningTop, amt); c2 = p.lerpColor(sunriseBottom, morningBottom, amt); }
-            else if (currentTime >= 11 && currentTime < 13) { let amt = p.map(currentTime, 11, 13, 0, 1); c1 = p.lerpColor(morningTop, middayTop, amt); c2 = p.lerpColor(morningBottom, middayBottom, amt); }
-            else if (currentTime >= 13 && currentTime < 16) { c1 = middayTop; c2 = middayBottom; }
-            else if (currentTime >= 16 && currentTime < 18) { let amt = p.map(currentTime, 16, 18, 0, 1); c1 = p.lerpColor(middayTop, eveningTop, amt); c2 = p.lerpColor(middayBottom, eveningBottom, amt); }
-            else if (currentTime >= 18 && currentTime < 20) { let amt = p.map(currentTime, 18, 20, 0, 1); c1 = p.lerpColor(eveningTop, sunsetTop, amt); c2 = p.lerpColor(eveningBottom, sunsetBottom, amt); }
-            else { let amt = p.map(currentTime, 20, 24, 0, 1); c1 = p.lerpColor(sunsetTop, nightTop, amt); c2 = p.lerpColor(sunsetBottom, nightBottom, amt); }
-            setGradient(0, 0, p.width, p.height, c1, c2);
+            const nightTop=p.color(0,0,0),nightBottom=p.color(25,25,112),sunriseTop=p.color(252,228,236),sunriseBottom=p.color(255,165,0),morningTop=p.color(135,206,250),morningBottom=p.color(240,255,255),middayTop=p.color(0,191,255),middayBottom=p.color(173,216,230),eveningTop=p.color(255,69,0),eveningBottom=p.color(139,69,19),sunsetTop=p.color(255,140,0),sunsetBottom=p.color(218,112,214);let c1,c2;if(currentTime>=0&&currentTime<5){c1=nightTop;c2=nightBottom}else if(currentTime>=5&&currentTime<7){let a=p.map(currentTime,5,7,0,1);c1=p.lerpColor(nightTop,sunriseTop,a);c2=p.lerpColor(nightBottom,sunriseBottom,a)}else if(currentTime>=7&&currentTime<11){let a=p.map(currentTime,7,11,0,1);c1=p.lerpColor(sunriseTop,morningTop,a);c2=p.lerpColor(sunriseBottom,morningBottom,a)}else if(currentTime>=11&&currentTime<13){let a=p.map(currentTime,11,13,0,1);c1=p.lerpColor(morningTop,middayTop,a);c2=p.lerpColor(morningBottom,middayBottom,a)}else if(currentTime>=13&&currentTime<16){c1=middayTop;c2=middayBottom}else if(currentTime>=16&&currentTime<18){let a=p.map(currentTime,16,18,0,1);c1=p.lerpColor(middayTop,eveningTop,a);c2=p.lerpColor(middayBottom,eveningBottom,a)}else if(currentTime>=18&&currentTime<20){let a=p.map(currentTime,18,20,0,1);c1=p.lerpColor(eveningTop,sunsetTop,a);c2=p.lerpColor(eveningBottom,sunsetBottom,a)}else{let a=p.map(currentTime,20,24,0,1);c1=p.lerpColor(sunsetTop,nightTop,a);c2=p.lerpColor(sunsetBottom,nightBottom,a)}setGradient(0,0,p.width,p.height,c1,c2);
         }
 
-        function setGradient(x, y, w, h, c1, c2) { p.noFill(); for (let i = y; i <= y + h; i++) { let inter = p.map(i, y, y + h, 0, 1); let c = p.lerpColor(c1, c2, inter); p.stroke(c); p.line(x, i, x + w, i); } }
+        function setGradient(x,y,w,h,c1,c2){p.noFill();for(let i=y;i<=y+h;i++){let a=p.map(i,y,y+h,0,1),t=p.lerpColor(c1,c2,a);p.stroke(t);p.line(x,i,x+w,i)}}
 
         function drawSunAndMoon(currentTime) {
-            const sunrise = 6, sunset = 18;
-            if (currentTime > sunrise && currentTime < sunset) {
-                let sunAngle = p.map(currentTime, sunrise, sunset, p.PI, p.TWO_PI);
-                let sunX = p.width / 2 + p.cos(sunAngle) * (p.width / 2.2);
-                let sunY = p.height * 0.9 + p.sin(sunAngle) * (p.height / 1.5);
-                p.fill(255, 255, 0, 220); p.noStroke(); p.ellipse(sunX, sunY, 60, 60);
-            }
-            if (currentTime > 18 || currentTime < 6) {
-                let timeIntoNight = (currentTime > 18) ? currentTime - 18 : currentTime + 6;
-                let moonAngle = p.map(timeIntoNight, 0, 12, p.PI, p.TWO_PI);
-                let moonX = p.width / 2 + p.cos(moonAngle) * (p.width / 2.2);
-                let moonY = p.height * 0.9 + p.sin(moonAngle) * (p.height / 1.5);
-                p.fill(240, 240, 240, 200); p.noStroke(); p.ellipse(moonX, moonY, 50, 50);
-            }
+            const sunrise=6,sunset=18;if(currentTime>sunrise&&currentTime<sunset){let a=p.map(currentTime,sunrise,sunset,p.PI,p.TWO_PI),t=p.width/2+p.cos(a)*(p.width/2.2),e=p.height*.9+p.sin(a)*(p.height/1.5);p.fill(255,255,0,220);p.noStroke();p.ellipse(t,e,60,60)}if(currentTime>18||currentTime<6){let a=currentTime>18?currentTime-18:currentTime+6,t=p.map(a,0,12,p.PI,p.TWO_PI),e=p.width/2+p.cos(t)*(p.width/2.2),o=p.height*.9+p.sin(t)*(p.height/1.5);p.fill(240,240,240,200);p.noStroke();p.ellipse(e,o,50,50)}
         }
         
-        function drawStars() { p.randomSeed(starSeed); p.fill(255, 255, 255, 150); p.noStroke(); for (let i = 0; i < (p.width * p.height) / 3000; i++) { p.ellipse(p.random(p.width), p.random(p.height * 0.7), p.random(1, 3), p.random(1, 3)); } }
+        function drawStars(){p.randomSeed(starSeed);p.fill(255,255,255,150);p.noStroke();for(let a=0;a<p.width*p.height/3e3;a++)p.ellipse(p.random(p.width),p.random(p.height*.7),p.random(1,3),p.random(1,3))}
 
-        function generateWindows(numRows, numCols) { let w = []; for (let i = 0; i < numRows; i++) { let r = []; for (let j = 0; j < numCols; j++) { r.push(p.random() > 0.6 ? 1 : 0); } w.push(r); } return w; }
+        function generateWindows(a,t){let e=[];for(let o=0;o<a;o++){let r=[];for(let n=0;n<t;n++)r.push(p.random()>.6?1:0);e.push(r)}return e}
 
         function drawCityscape(currentTime) {
             p.noStroke();
             buildingData.forEach(b => {
                 p.fill(30, 30, 50);
                 p.rect(b.x, p.height - b.h, b.w, b.h);
-
                 if (b.h === 400) drawClock(b.x + b.w / 2, p.height - b.h + 60, currentTime);
-                
                 let windowHeight = 10, windowWidth = 8, gap = 4;
                 for (let r = 0; r < b.windows.length; r++) {
                     for (let c = 0; c < b.windows[r].length; c++) {
@@ -189,18 +148,44 @@
             });
         }
         
-        function drawClock(x, y, currentTime) { p.push(); let hr = p.floor(currentTime); let min = p.floor((currentTime - hr) * 60); p.fill(10, 10, 10, 180); p.noStroke(); p.rectMode(p.CENTER); p.rect(x, y, 80, 40, 5); p.fill(255, 0, 0); p.textFont('monospace', 32); p.textAlign(p.CENTER, p.CENTER); let timeString = p.second() % 2 === 0 ? p.nf(hr, 2) + ":" + p.nf(min, 2) : p.nf(hr, 2) + " " + p.nf(min, 2); p.text(timeString, x, y); p.pop(); }
+        function drawClock(x,y,currentTime){p.push();let a=p.floor(currentTime),t=p.floor(60*(currentTime-a));p.fill(10,10,10,180);p.noStroke();p.rectMode(p.CENTER);p.rect(x,y,80,40,5);p.fill(255,0,0);p.textFont("monospace",32);p.textAlign(p.CENTER,p.CENTER);let e=p.second()%2==0?p.nf(a,2)+":"+p.nf(t,2):p.nf(a,2)+" "+p.nf(t,2);p.text(e,x,y);p.pop()}
 
         function drawZeppelin() {
             let zepW = 140, zepH = 50;
-            p.push(); p.translate(zeppelinX, zeppelinY);
-            p.fill(200, 0, 0); p.noStroke(); let finX = zeppelinDirection > 0 ? -zepW/2 : zepW/2; p.triangle(finX, 0, finX - 20 * zeppelinDirection, -15, finX - 20 * zeppelinDirection, 15);
-            let c1 = p.color(220, 220, 255); let c2 = p.color(150, 150, 180); for (let i = 0; i < zepH; i++) { let inter = p.map(i, 0, zepH, 0, 1); p.stroke(p.lerpColor(c1, c2, inter)); p.line(-zepW/2, -zepH/2 + i, zepW/2, -zepH/2 + i); }
+            p.push();
+            p.translate(zeppelinX, zeppelinY);
+            
+            // Tail fin
+            p.fill(200, 0, 0); p.noStroke();
+            let finX = zeppelinDirection > 0 ? -zepW/2 : zepW/2;
+            p.triangle(finX, 0, finX - 20 * zeppelinDirection, -15, finX - 20 * zeppelinDirection, 15);
+
+            // Balloon (Corrected shape)
+            p.noStroke();
+            let c1 = p.color(220, 220, 255); let c2 = p.color(150, 150, 180);
+            for (let i = -zepH/2; i < zepH/2; i++) {
+                let inter = p.map(i, -zepH/2, zepH/2, 0, 1);
+                let currentY = i;
+                let r = zepW / 2;
+                let x = r * p.sqrt(1 - (currentY*currentY) / ((zepH/2)*(zepH/2)));
+                p.stroke(p.lerpColor(c1, c2, inter));
+                p.line(-x, currentY, x, currentY);
+            }
             p.noFill(); p.stroke(100); p.ellipse(0, 0, zepW, zepH);
-            p.fill(80); p.rect(-30, zepH/2, 60, 15, 3);
-            p.fill(10, 10, 10, 180); p.rectMode(p.CENTER); p.rect(0, 0, 110, 25, 3); p.fill(50, 255, 50); p.textFont('monospace', 18); p.textAlign(p.CENTER, p.CENTER); p.text(nameplateText, 0, 0);
+            
+            // Gondola
+            p.fill(80); p.noStroke(); p.rect(-30, zepH/2 - 5, 60, 15, 3);
+            
+            // Nameplate
+            p.fill(10, 10, 10, 180); p.rectMode(p.CENTER);
+            p.rect(0, 0, 110, 25, 3);
+            p.fill(50, 255, 50); p.textFont('monospace', 18);
+            p.textAlign(p.CENTER, p.CENTER);
+            p.text(nameplateText, 0, 0);
+            
             p.pop();
-            zeppelinX += zeppelinDirection; if (zeppelinX > p.width - zepW/2 || zeppelinX < zepW/2) zeppelinDirection *= -1;
+            zeppelinX += zeppelinDirection;
+            if (zeppelinX > p.width - zepW/2 || zeppelinX < zepW/2) zeppelinDirection *= -1;
         }
       }
       new p5(sketch);

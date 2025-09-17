@@ -3,6 +3,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
     background: #fff; /* A solid background for the content area */
+    overflow-x: hidden; /* Prevents horizontal stretching */
 }
 
 /* --- Background Cityscape Canvas --- */
@@ -18,21 +19,23 @@ body {
 
 /* --- Theme Overrides --- */
 header {
-    height: 70vh; /* This now just creates space */
+    height: 60vh; /* This creates the "empty" space for the banner */
     padding: 0;
-    border-bottom: none; /* Remove border */
-    background: transparent; /* Make it see-through */
+    border-bottom: none !important; /* Remove the banner remnant */
+    background: transparent !important; /* Make it see-through */
 }
 
 #content-wrapper {
     position: relative; /* Needed for z-index stacking */
     background: transparent;
+    margin-top: -10vh; /* Pull the content up slightly over the header space */
 }
 
 .inner.clearfix {
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background for readability */
+    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white background for readability */
     border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 
@@ -57,7 +60,7 @@ header {
 
 /* Definitive fix for the profile picture */
 #sidebar .profile-pic {
-    max-width: 220px;
+    max-width: 220px !important; /* Force the max-width */
     width: 100%;
     height: auto;
     border-radius: 8px;
