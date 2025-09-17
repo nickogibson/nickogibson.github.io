@@ -32,4 +32,4 @@ My collection of music, artwork, books, and more.
 	class="MixerContainer"
 	style="width: 100%; aspect-ratio: 4 / 3;">
 	<iframe height="100%"  width="100%" src="https://nickogibson.github.io/SFX-Mixer/" title="SFX Mixer"></iframe>
-</div>
+</div>  
