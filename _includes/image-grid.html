@@ -1,0 +1,42 @@
+<style>
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    list-style: none; /* Removes bullet points for lists */
+    margin: 0;
+    padding: 0;
+  }
+  .image-grid li {
+    text-align: center;
+  }
+  .image-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  .image-grid img:hover {
+    transform: scale(1.05);
+  }
+  .image-grid .caption {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #555;
+    font-family: sans-serif;
+  }
+</style>
+
+<ul class="image-grid">
+  {% for image in include.images %}
+    <li>
+      <a href="{{ image.src }}">
+        <img src="{{ image.src }}" alt="{{ image.alt }}">
+      </a>
+      <p class="caption">{{ image.caption }}</p>
+    </li>
+  {% endfor %}
+</ul>
