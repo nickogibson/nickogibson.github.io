@@ -8,33 +8,19 @@ body {
     padding-top: 2rem;
 }
 
-hr {
-    border: 0;
-    height: 1px;
-    background: #e0e0e0;
-    margin: 2rem 0;
-}
-
 /* --- Header & Cityscape --- */
-
-/* NEW: Style the new banner container */
-#cityscape-banner {
-    height: 70vh;
+header {
+    height: 70vh; /* Set the height of the banner */
     width: 100%;
+    padding: 0; /* Remove default padding */
     border-bottom: 1px solid #ddd;
+    background: #000; /* Fallback color */
 }
 
-/* Make sure the iframe fills the new banner */
-#cityscape-container {
+/* Make the canvas container fill the header */
+#cityscape-canvas-container {
     width: 100%;
     height: 100%;
-    border: none;
-    display: block; 
-}
-
-/* HIDE the theme's original header so it doesn't interfere */
-header {
-    display: none !important;
 }
 
 /* --- Main Content & Typography --- */
@@ -47,7 +33,6 @@ header {
     font-size: 1.5rem;
 }
 
-
 /* --- Sidebar Styling --- */
 #sidebar {
     padding: 1.5rem;
@@ -57,13 +42,13 @@ header {
     text-align: center;
 }
 
-/* CORRECTED: More robust rule for the profile picture */
+/* Correctly size the profile picture */
 #sidebar .profile-pic {
     max-width: 220px;
     width: 100%;
     height: auto;
     border-radius: 8px;
-    margin: 0 auto 1rem auto; /* Center the image */
+    margin: 0 auto 1rem auto;
     display: block;
 }
 
@@ -81,28 +66,23 @@ header {
     margin-bottom: 1.5rem;
 }
 
-.sidebar-buttons a {
+.sidebar-buttons a, .sidebar-buttons img {
+    width: 100%;
     display: block;
-    text-decoration: none;
 }
 
 .sidebar-buttons .button {
     background-color: #555;
     color: white;
-    text-align: center;
     padding: 12px 0;
     border-radius: 5px;
     transition: background-color 0.2s ease;
-    width: 100%;
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 .sidebar-buttons .button:hover {
     background-color: #007bff;
-}
-
-.sidebar-buttons img {
-    width: 100%;
 }
 
 .social-badges {
