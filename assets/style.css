@@ -16,21 +16,25 @@ hr {
 }
 
 /* --- Header & Cityscape --- */
-header {
-    /* Remove theme defaults and set a specific height */
-    padding: 0 !important;
-    border: none !important;
-    background: #000;
-    height: 70vh !important; /* Force the header height */
+
+/* NEW: Style the new banner container */
+#cityscape-banner {
+    height: 70vh;
     width: 100%;
+    border-bottom: 1px solid #ddd;
 }
 
-/* Make sure the iframe fills the header completely */
+/* Make sure the iframe fills the new banner */
 #cityscape-container {
-    width: 100% !important;
-    height: 100% !important;
+    width: 100%;
+    height: 100%;
     border: none;
     display: block; 
+}
+
+/* HIDE the theme's original header so it doesn't interfere */
+header {
+    display: none !important;
 }
 
 /* --- Main Content & Typography --- */
@@ -53,13 +57,14 @@ header {
     text-align: center;
 }
 
-/* CORRECTED: Constrain the profile picture size */
+/* CORRECTED: More robust rule for the profile picture */
 #sidebar .profile-pic {
-    max-width: 220px; /* Set a max size */
-    width: 100%;      /* Make it responsive within the container */
-    height: auto;     /* Maintain aspect ratio */
-    border-radius: 8px; /* Soften the corners */
-    margin-bottom: 1rem;
+    max-width: 220px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 0 auto 1rem auto; /* Center the image */
+    display: block;
 }
 
 #sidebar p {

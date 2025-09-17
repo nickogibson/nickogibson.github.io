@@ -19,10 +19,14 @@
   </head>
 
   <body>
-    <header>
-      <!-- The iframe is now controlled by the stylesheet via its ID -->
+
+    <!-- NEW: A dedicated container for the cityscape outside the theme's header -->
+    <div id="cityscape-banner">
       <iframe id="cityscape-container" src="/cityscape.html"></iframe>
-    </header>
+    </div>
+
+    <!-- The original header is now empty and will be hidden by the CSS -->
+    <header></header>
 
     <div id="content-wrapper">
       <div class="inner clearfix">
