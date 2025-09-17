@@ -22,13 +22,13 @@ I like making sun related swag, check this out , from my <a href="https://www.r
   dark sun praise-essential-t-shirt.jpg"
 %}
 
- <a href="https://linktr.ee/sundawgs>Praise the Sun with Sundawgs</a>  
+ <a href="https://linktr.ee/sundawgs">Praise the Sun with Sundawgs</a>  
 music, art, more.    
 
 # SFX Mixer
 Did you come here for the <a href="https://nickogibson.github.io/SFX-Mixer/">SFX Mixer</a>?
-<div 
-	class="MixerContainer" 
+<div 
+	class="MixerContainer" 
 	style="width: 100%; aspect-ratio: 4 / 3;">
-	<iframe height="100%"  width="100%" src="https://nickogibson.github.io/SFX-Mixer/" title="SFX Mixer"></iframe>
+	<iframe height="100%"  width="100%" src="https://nickogibson.github.io/SFX-Mixer/" title="SFX Mixer"></iframe>
 </div>
