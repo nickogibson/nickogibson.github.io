@@ -31,12 +31,15 @@
 </style>
 
 <ul class="image-grid">
-  {% for image in include.images %}
+  {% assign images = include.images | split: ',' %}
+  {% for image_name in images %}
+    {% assign clean_name = image_name | strip %}
+    {% assign alt_text = clean_name | remove: '.jpg' | replace: '-', ' ' | replace: 'sol invictus', 'Sol Invictus' | replace: 'dark sun praise', 'Dark Sun Praise' | capitalize %}
     <li>
-      <a href="{{ image.src }}">
-        <img src="{{ image.src }}" alt="{{ image.alt }}">
+      <a href="{{ site.baseurl }}/assets/{{ clean_name }}">
+        <img src="{{ site.baseurl }}/assets/{{ clean_name }}" alt="{{ alt_text }}">
       </a>
-      <p class="caption">{{ image.caption }}</p>
+      <p class="caption">{{ alt_text }}</p>
     </li>
   {% endfor %}
 </ul>
