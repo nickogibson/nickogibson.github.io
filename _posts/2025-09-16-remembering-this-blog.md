@@ -13,7 +13,7 @@ Text to 3D generation is getting pretty good, I'm using Meshy, but the main thin
 # For those who love the sun
 I like making sun related swag, check this out  
 
-{% include image_grid.html images = 
+{% include image-grid.html images = 
   "kokopelli173909758-throw-pillow.jpg,
   kokopelli work-173909960-throw-pillow.jpg,
   kokopelli work-173909960-graphic-t-shirt.jpg,
