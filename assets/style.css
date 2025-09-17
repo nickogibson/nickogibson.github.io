@@ -1,3 +1,6 @@
+---
+# this space intentionally left blank
+---
 /* General Body Fixes */
 body {
   background-color: transparent; /* Allows canvas to show through */
@@ -14,10 +17,9 @@ body {
   z-index: -1; /* Place it behind all other content */
 }
 
-/* Header Styling */
+/* Header Styling - HIDE the theme's header completely */
 header {
-  background: transparent !important; /* Override theme's header background */
-  border-bottom: none !important; /* Remove the theme's bottom border on the header */
+  display: none !important;
 }
 
 /* Main Content Readability */
@@ -26,6 +28,7 @@ header {
   padding: 2em;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin-top: 70vh; /* Push content down to clear the cityscape */
 }
 
 /* Sidebar Styling */
