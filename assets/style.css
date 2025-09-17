@@ -1,112 +1,55 @@
-/* --- General Body & Layout --- */
+/* General Body Fixes */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    background: #fff; /* A solid background for the content area */
-    overflow-x: hidden; /* Prevents horizontal stretching */
+  background-color: transparent; /* Allows canvas to show through */
+  overflow-x: hidden; /* This is the fix! Prevents horizontal scrollbar */
 }
 
-/* --- Background Cityscape Canvas --- */
+/* Canvas Container */
 #cityscape-canvas-container {
-    position: fixed; /* Fix it to the viewport */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Place it behind everything else */
-    overflow: hidden; /* Hide any scrollbars */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Use viewport width */
+  height: 100vh; /* Use viewport height */
+  z-index: -1; /* Place it behind all other content */
 }
 
-/* --- Theme Overrides --- */
+/* Header Styling */
 header {
-    height: 60vh; /* This creates the "empty" space for the banner */
-    padding: 0;
-    border-bottom: none !important; /* Remove the banner remnant */
-    background: transparent !important; /* Make it see-through */
+  background: transparent !important; /* Override theme's header background */
+  border-bottom: none !important; /* Remove the theme's bottom border on the header */
 }
 
-#content-wrapper {
-    position: relative; /* Needed for z-index stacking */
-    background: transparent;
-    margin-top: -10vh; /* Pull the content up slightly over the header space */
+/* Main Content Readability */
+#main-content {
+  background: rgba(255, 255, 255, 0.92); /* Semi-transparent white background */
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.inner.clearfix {
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white background for readability */
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+/* Sidebar Styling */
+aside#sidebar {
+  font-size: 1rem;
 }
 
-
-/* --- Main Content & Typography --- */
-#main-content h1, #main-content h2, #main-content h3 {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+aside#sidebar .profile-pic {
+  max-width: 220px !important;
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto 1em;
 }
 
-#main-content h2 {
-    border-bottom: none;
-    font-size: 1.5rem;
-}
-
-/* --- Sidebar Styling --- */
-#sidebar {
-    padding: 1.5rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+aside#sidebar p {
+    font-size: 0.95em;
+    line-height: 1.5;
     text-align: center;
 }
 
-/* Definitive fix for the profile picture */
-#sidebar .profile-pic {
-    max-width: 220px !important; /* Force the max-width */
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 0 auto 1rem auto;
-    display: block;
-}
-
-#sidebar p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #444;
-    margin-bottom: 1.5rem;
-}
-
-.sidebar-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.sidebar-buttons a, .sidebar-buttons img {
-    width: 100%;
-    display: block;
-}
-
-.sidebar-buttons .button {
-    background-color: #555;
-    color: white;
-    padding: 12px 0;
-    border-radius: 5px;
-    transition: background-color 0.2s ease;
-    box-sizing: border-box;
-    text-decoration: none;
-}
-
-.sidebar-buttons .button:hover {
-    background-color: #007bff;
-}
-
-.social-badges {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-    border-top: 1px solid #e0e0e0;
-    padding-top: 1.5rem;
+aside#sidebar .sidebar-buttons img,
+aside#sidebar .social-badges img {
+    margin-bottom: 0.5em;
 }
 
