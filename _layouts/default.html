@@ -25,7 +25,7 @@
     <!-- The canvas container is now a background layer for the whole page -->
     <div id="cityscape-canvas-container"></div>
 
-    <!-- The theme's original header has to go. -->
+    <!-- The theme's original header. We will make this transparent. -->
     <header></header>
 
     <div id="content-wrapper">
@@ -76,25 +76,68 @@
           createCityscape();
           
           setInterval(() => {
-            nameplateText = (nameplateText === "Nicko G.") ? "Don't Panic" : "Nicko G.";
+            nameplateText = (nameplateText === "Nicko G.") ? "Don't Panic" : "Don't Panic";
           }, 4000);
         };
         
         function createCityscape() {
             buildingData = []; // Clear old data
-            const maxCityWidth = p.min(1200, p.width * 0.9); // City is max 1200px or 90% of screen
-            const buildingWidths = [0.1, 0.08, 0.12, 0.09, 0.13, 0.1, 0.12, 0.09, 0.1];
-            
-            let currentX = (p.width - maxCityWidth) / 2;
+            const buildingWidths = [70, 90, 110, 80, 100]; // Pool of thinner fixed widths
+            const clockTowerWidth = 120; // Thinner clock tower
 
-            buildingWidths.forEach((widthPercent, index) => {
-                let b = { x: currentX, w: maxCityWidth * widthPercent };
-                // Make clock tower (5th building) the tallest
-                b.h = (index === 4) ? 400 : p.random(150, 320);
-                b.windows = generateWindows(p.floor(b.h / 15), p.floor(b.w / 15));
-                buildingData.push(b);
-                currentX += b.w;
+            const cityFillPercentage = 0.7;
+            const targetCityWidth = p.width * cityFillPercentage;
+            const cityStartX = (p.width - targetCityWidth) / 2;
+            const cityEndX = cityStartX + targetCityWidth;
+
+            // 1. Place the Clock Tower in the absolute center of the canvas
+            const clockTowerX = (p.width - clockTowerWidth) / 2;
+            buildingData.push({
+                x: clockTowerX,
+                w: clockTowerWidth,
+                h: 400, // Tallest building
+                windows: generateWindows(400, clockTowerWidth)
             });
+
+            // 2. Generate buildings to the right, stopping at the 70% boundary
+            let currentX = clockTowerX + clockTowerWidth;
+            while (currentX < cityEndX) {
+                let newWidth = p.random(buildingWidths);
+                if (currentX + newWidth > cityEndX) {
+                    newWidth = cityEndX - currentX;
+                }
+                if (newWidth < 40) break;
+
+                let newHeight = p.random(150, 320);
+                buildingData.push({
+                    x: currentX,
+                    w: newWidth,
+                    h: newHeight,
+                    windows: generateWindows(newHeight, newWidth)
+                });
+                currentX += newWidth;
+            }
+
+            // 3. Generate buildings to the left, stopping at the 70% boundary
+            currentX = clockTowerX;
+            while (currentX > cityStartX) {
+                let newWidth = p.random(buildingWidths);
+                let newX = currentX - newWidth;
+                if (newX < cityStartX) {
+                    newWidth = currentX - cityStartX;
+                    newX = cityStartX;
+                }
+                if (newWidth < 40) break;
+
+                let newHeight = p.random(150, 320);
+                buildingData.push({
+                    x: newX,
+                    w: newWidth,
+                    h: newHeight,
+                    windows: generateWindows(newHeight, newWidth)
+                });
+                currentX = newX;
+            }
         }
 
         p.windowResized = function() {
@@ -123,32 +166,48 @@
         }
         
         function drawStars(){p.randomSeed(starSeed);p.fill(255,255,255,150);p.noStroke();for(let a=0;a<p.width*p.height/3e3;a++)p.ellipse(p.random(p.width),p.random(p.height*.7),p.random(1,3),p.random(1,3))}
-
-        function generateWindows(a,t){let e=[];for(let o=0;o<a;o++){let r=[];for(let n=0;n<t;n++)r.push(p.random()>.6?1:0);e.push(r)}return e}
+        
+        function generateWindows(buildingHeight, buildingWidth){
+            let windows = [];
+            const windowHeight = 10, windowWidth = 8, hGap = 4, vGap = 4;
+            const numRows = p.floor((buildingHeight - vGap * 2) / (windowHeight + vGap));
+            const numCols = p.floor((buildingWidth - hGap * 2) / (windowWidth + hGap));
+            
+            for(let r = 0; r < numRows; r++){
+                let row = [];
+                for(let c = 0; c < numCols; c++){
+                    row.push(p.random() > 0.6 ? 1 : 0);
+                }
+                windows.push(row);
+            }
+            return windows;
+        }
 
         function drawCityscape(currentTime) {
             p.noStroke();
             buildingData.forEach(b => {
                 p.fill(30, 30, 50);
                 p.rect(b.x, p.height - b.h, b.w, b.h);
-                if (b.h === 400) drawClock(b.x + b.w / 2, p.height - b.h + 60, currentTime);
-                let windowHeight = 10, windowWidth = 8, gap = 4;
+                
+                let windowHeight = 10, windowWidth = 8, hGap = 4, vGap = 4;
                 for (let r = 0; r < b.windows.length; r++) {
                     for (let c = 0; c < b.windows[r].length; c++) {
-                        let yPos = p.height - b.h + (r * (windowHeight + gap)) + 20;
-                        if (b.h === 400 && yPos < p.height - b.h + 150) continue;
                         if (b.windows[r][c] === 1) {
-                            let xPos = b.x + (c * (windowWidth + gap)) + gap;
+                            let yPos = p.height - b.h + (r * (windowHeight + vGap)) + vGap*2;
+                            let xPos = b.x + (c * (windowWidth + hGap)) + hGap*2;
+                            
                             let wFill = p.color(255, 255, 102);
                             wFill.setAlpha((currentTime >= 7 && currentTime < 18) ? 100 : 200);
                             p.fill(wFill); p.rect(xPos, yPos, windowWidth, windowHeight);
                         }
                     }
                 }
+                // Draw clock on tallest building
+                if (b.h === 400) drawClock(b.x + b.w / 2, p.height - b.h + 55, currentTime);
             });
         }
         
-        function drawClock(x,y,currentTime){p.push();let a=p.floor(currentTime),t=p.floor(60*(currentTime-a));p.fill(10,10,10,180);p.noStroke();p.rectMode(p.CENTER);p.rect(x,y,80,40,5);p.fill(255,0,0);p.textFont("monospace",32);p.textAlign(p.CENTER,p.CENTER);let e=p.second()%2==0?p.nf(a,2)+":"+p.nf(t,2):p.nf(a,2)+" "+p.nf(t,2);p.text(e,x,y);p.pop()}
+        function drawClock(x,y,currentTime){p.push();let a=p.floor(currentTime),t=p.floor(60*(currentTime-a));p.fill(0);p.noStroke();p.rectMode(p.CENTER);p.rect(x,y,83,40,5);p.fill(255,0,0);p.textFont("monospace",28);p.textAlign(p.CENTER,p.CENTER);let e=p.second()%2==0?p.nf(a,2)+":"+p.nf(t,2):p.nf(a,2)+" "+p.nf(t,2);p.text(e,x,y+2);p.pop()}
 
         function drawZeppelin() {
             let zepW = 140, zepH = 50;
@@ -160,7 +219,7 @@
             let finX = zeppelinDirection > 0 ? -zepW/2 : zepW/2;
             p.triangle(finX, 0, finX - 20 * zeppelinDirection, -15, finX - 20 * zeppelinDirection, 15);
 
-            // Balloon (Corrected shape)
+            // Balloon 
             p.noStroke();
             let c1 = p.color(220, 220, 255); let c2 = p.color(150, 150, 180);
             for (let i = -zepH/2; i < zepH/2; i++) {
@@ -174,14 +233,22 @@
             p.noFill(); p.stroke(100); p.ellipse(0, 0, zepW, zepH);
             
             // Gondola
-            p.fill(80); p.noStroke(); p.rect(-30, zepH/2 - 5, 60, 15, 3);
+            p.fill(80); p.noStroke(); 
+            p.rectMode(p.CENTER);
+            p.rect(0, zepH/2 - 5, 60, 15, 3);
             
+            // Gondola Windows
+            p.fill(255, 255, 102, 180);
+            p.rect(-18, zepH/2 - 5, 8, 5, 1);
+            p.rect(-4, zepH/2 - 5, 8, 5, 1);
+            p.rect(10, zepH/2 - 5, 8, 5, 1);
+
             // Nameplate
-            p.fill(10, 10, 10, 180); p.rectMode(p.CENTER);
-            p.rect(0, 0, 110, 25, 3);
-            p.fill(50, 255, 50); p.textFont('monospace', 18);
+            p.fill(10, 10, 10, 180); 
+            p.rect(0, 0, 105, 22, 3);
+            p.fill(50, 255, 50); p.textFont('monospace', 16);
             p.textAlign(p.CENTER, p.CENTER);
-            p.text(nameplateText, 0, 0);
+            p.text(nameplateText, 0, 1);
             
             p.pop();
             zeppelinX += zeppelinDirection;
