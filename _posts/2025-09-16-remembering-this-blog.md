@@ -14,10 +14,10 @@ Text to 3D generation is getting pretty good, I'm using Meshy, but the main thin
 I like making sun related swag, check this out , from my <a href="https://www.redbubble.com/people/NickoGibson/shop">RedBubble Shop</a>   
 
 {% include image-grid.html images = 
-  "kokopelli173909758-throw-pillow.jpg,
-  kokopelli work-173909960-throw-pillow.jpg,
+  "kokopelli-throw-pillow.jpg,
+  kokopelli-throw-pillow 2.jpg,
   kokopelli work-173909960-graphic-t-shirt.jpg,
-  work-173862070-clock.jpg,
+  solar-clock.jpg,
   sol invictus-classic-t-shirt.jpg,
   dark sun praise-essential-t-shirt.jpg"
 %}
