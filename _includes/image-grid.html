@@ -37,7 +37,7 @@
     {% assign alt_text = clean_name | remove: '.jpg' | replace: '-', ' ' | capitalize %}
     <li>
       <a href="{{ site.baseurl }}/TemplateData/{{ clean_name }}">
-        <img src="{{ site.baseurl }}/assets/{{ clean_name }}" alt="{{ alt_text }}">
+        <img src="{{ site.baseurl }}/TemplateData/{{ clean_name }}" alt="{{ alt_text }}">
       </a>
       <p class="caption">{{ alt_text }}</p>
     </li>
