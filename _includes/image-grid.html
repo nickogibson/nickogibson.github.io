@@ -18,6 +18,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
+    cursor: pointer; /* Indicates the image is clickable */
   }
   .image-grid img:hover {
     transform: scale(1.05);
@@ -28,18 +29,77 @@
     color: #555;
     font-family: sans-serif;
   }
+
+  /* Modal/Popup Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .modal-overlay:target {
+    display: flex; /* Show the modal when its ID is in the URL */
+  }
+  .modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    animation: zoomIn 0.3s ease-out;
+  }
+  .modal-content img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+  }
+  .modal-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .modal-close:hover, .modal-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  @keyframes zoomIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
 </style>
 
 <ul class="image-grid">
   {% assign images = include.images | split: ',' %}
   {% for image_name in images %}
     {% assign clean_name = image_name | strip %}
-    {% assign alt_text = clean_name | remove: '.jpg' | replace: '-', ' ' | capitalize %}
+    {% assign alt_text = clean_name | remove: '.jpg' | remove: '.JPG' | replace: '-', ' ' | capitalize %}
     <li>
-      <a href="{{ site.baseurl }}/TemplateData/{{ clean_name }}">
+      <a href="#modal-{{ forloop.index }}">
         <img src="{{ site.baseurl }}/TemplateData/{{ clean_name }}" alt="{{ alt_text }}">
       </a>
       <p class="caption">{{ alt_text }}</p>
     </li>
   {% endfor %}
 </ul>
+
+{% for image_name in images %}
+  {% assign clean_name = image_name | strip %}
+  {% assign alt_text = clean_name | remove: '.jpg' | remove: '.JPG' | replace: '-', ' ' | capitalize %}
+  <div id="modal-{{ forloop.index }}" class="modal-overlay">
+    <div class="modal-content">
+      <a href="#" class="modal-close">&times;</a>
+      <img src="{{ site.baseurl }}/TemplateData/{{ clean_name }}" alt="{{ alt_text }}">
+    </div>
+  </div>
+{% endfor %}
