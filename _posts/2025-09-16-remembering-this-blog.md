@@ -1,7 +1,7 @@
 ---
-title:  Hey what's new?
-date: 2025-09-16 19:39:21 -0700
-categories: blog 
+title: Hey what's new?
+date: 2025-09-16 20:36:02 -0700
+categories: blog
 ---
 It has been a while since I updated this page.  
   
@@ -13,6 +13,14 @@ Text to 3D generation is getting pretty good, I'm using Meshy, but the main thin
 # For those who love the sun
 I like making sun related swag, check this out  
 
+{% include image-grid.html images = 
+  "kokopelli173909758-throw-pillow.jpg,
+  kokopelli work-173909960-throw-pillow.jpg,
+  kokopelli work-173909960-graphic-t-shirt.jpg,
+  work-173862070-clock.jpg,
+  sol invictus-classic-t-shirt.jpg,
+  dark sun praise-essential-t-shirt.jpg"
+%}
 
  <a href="https://linktr.ee/sundawgs>Praise the Sun with Sundawgs</a>  
 music, art, more.    
