@@ -2,6 +2,7 @@
 title:  A.I Art for Gamedev?
 date:   2023-03-04 10:00:00 -0700
 categories: blog 
+excerpt: "Some experiments"
 ---
 ![Sci-Fi Livingroom Panorama](/TemplateData/scifi-livingroom-vr-panorama.jpg)
 A.I Art is <a href="https://twitter.com/NickoGibson/status/1631915857403338752" target="_blank" rel="nofollow">getting really good</a>, and there are already several ways we can use it for gamedev. Textures for example, can never get enough of those.

@@ -1,6 +1,6 @@
 ---
 title: Hey what's new?
-excerpt: ""
+excerpt: "New game and stuff"
 date: 2025-09-16 20:36:02 -0700
 categories: blog
 ---

@@ -2,6 +2,7 @@
 title:  Will AI Take All the Jobs?
 date:   2023-01-09 00:00:00 -0700
 categories: blog 
+excerpt: "Do people still blog? I guess I do. "
 ---
 ### Let's hope not.
 Happy new Year, and thanks for reading my blog!

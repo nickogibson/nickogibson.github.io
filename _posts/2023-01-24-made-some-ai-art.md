@@ -2,6 +2,7 @@
 title:  I Made Some more Art, and a book!
 date:   2023-01-24 14:00:00 -0700
 categories: blog 
+excerpt: "two books to check out"
 ---
 If you want to use any of my graphics or stock photos, check my albums and let me know! 
 ![character design images](/TemplateData/character-artwork.jpg)

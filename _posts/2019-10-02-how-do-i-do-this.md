@@ -2,6 +2,7 @@
 title:  How do I do this?
 date:   2019-10-02 15:13:21 -0700
 categories: blog 
+excerpt:"First post"
 ---
 ### Trying to figure it all out.
 My first blog post on Github with Jekyll.
