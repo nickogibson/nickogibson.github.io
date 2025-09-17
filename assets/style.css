@@ -1,0 +1,82 @@
+---
+# This empty front matter is required for Jekyll to process the file.
+---
+
+// Import the theme's original stylesheet so we're just adding to it.
+@import "{{ site.theme }}";
+
+/*
+================================================
+Your custom CSS overrides begin here.
+================================================
+*/
+
+// 1. Override the Header
+// This turns the header into a container for your p5.js cityscape.
+header {
+  background: #111; // Dark background as a fallback
+  border-bottom: 2px solid #444;
+  padding: 0;
+  margin: 0;
+  height: 250px; // A fixed height for the cityscape canvas
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  // Remove the default padding/margins from the theme's inner container
+  .inner {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%; // Allow it to fill the header
+    height: 100%;
+  }
+
+  // Hide the default site title and tagline from the header,
+  // as we'll move them into the main content area.
+  h1, h2 {
+    display: none;
+  }
+}
+
+// 2. Style the iframe that will hold the cityscape
+#cityscape-container {
+  width: 100%;
+  height: 100%;
+  border: none; // Remove the default iframe border
+}
+
+// 3. Clean up the Sidebar layout
+#sidebar {
+    // A container for the main buttons (Follow, Itch.io, Discord)
+    .sidebar-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px; /* Adds space between buttons */
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    // A container for the smaller social media badges
+    .social-badges {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px; /* Adds space between badges */
+        margin-top: 15px;
+    }
+
+    // Give your profile image some rounded corners
+    img[src*="nicko_g_drinking_coffee_anime.png"] {
+        border-radius: 8px;
+    }
+}
+
+// Add a horizontal rule style for visual separation
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(68, 68, 68, 0.75), rgba(0, 0, 0, 0));
+}

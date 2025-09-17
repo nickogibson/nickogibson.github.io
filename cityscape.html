@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Cityscape</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        /* Basic CSS to make the canvas fill the container */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<script>
+// --- Global Variables ---
+let buildingData = [];
+let starSeed;
+
+// --- Zeppelin State Variables ---
+let zeppelinX;
+let zeppelinY;
+let zeppelinSpeed = 0.5;
+let zeppelinDirection = 1;
+let zeppelinText = "Nicko G.";
+let lastTextChange = 0;
+const textChangeInterval = 4000; // 4 seconds
+
+// --- Variables for UI Testing ---
+let timeSlider;
+let syncButton;
+let isRealTime = true; 
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  starSeed = floor(random(1000));
+  
+  // Initialize zeppelin position
+  zeppelinX = -100; // Start off-screen to the left
+  zeppelinY = height * 0.2;
+
+  defineCityscapeLayout(); // Use the static layout function
+
+  // --- UI for Time Control (uncomment for testing) ---
+  /*
+  let uiContainer = createDiv();
+  uiContainer.position(10, 10);
+  uiContainer.style('background-color', 'rgba(0,0,0,0.3)');
+  uiContainer.style('padding', '10px');
+  uiContainer.style('border-radius', '5px');
+  uiContainer.style('color', 'white');
+  uiContainer.style('font-family', 'monospace');
+  
+  let title = createP('Time Control');
+  title.parent(uiContainer);
+  title.style('margin', '0 0 5px 0');
+
+  timeSlider = createSlider(0, 24, (new Date()).getHours(), 0.01);
+  timeSlider.parent(uiContainer);
+  timeSlider.style('width', '200px');
+  timeSlider.input(() => {
+    isRealTime = false;
+  });
+  
+  syncButton = createButton('Sync to Real-Time');
+  syncButton.parent(uiContainer);
+  syncButton.mousePressed(() => {
+    isRealTime = true;
+  });
+  */
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    // Regenerate the city layout and windows to fit the new dimensions
+    defineCityscapeLayout(); 
+    // Reset zeppelin Y position on resize
+    zeppelinY = height * 0.2;
+}
+
+function defineCityscapeLayout() {
+    buildingData = []; // Clear old data
+
+    // Define building heights as a percentage of canvas height.
+    const layoutPlan = [
+        { h: 0.45 }, { h: 0.55 }, { h: 0.30 }, { h: 0.65 }, 
+        { h: 0.50 }, { h: 0.68 }, { h: 0.40 }, 
+        { h: 0.75, hasClock: true },    // The tallest building gets the clock
+        { h: 0.52 }, { h: 0.60 }, { h: 0.35 }, { h: 0.58 }, { h: 0.42 }
+    ];
+    
+    const buildingWidth = width / (layoutPlan.length - 1);
+
+    for (let i = 0; i < layoutPlan.length; i++) {
+        const plan = layoutPlan[i];
+        const h = height * plan.h;
+        const x = i * buildingWidth - (buildingWidth / 2);
+        
+        let building = {
+            x: x, width: buildingWidth, height: h,
+            windows: generateWindows(h, buildingWidth),
+            hasClock: plan.hasClock || false
+        };
+        buildingData.push(building);
+    }
+}
+
+function draw() {
+  // --- Time Logic ---
+  let currentTime, hr_real, min_real, sec_real;
+  
+  // To use the slider for testing, uncomment the block below and comment out the single line after it.
+  /*
+  if (isRealTime) {
+    let now = new Date(); hr_real = now.getHours(); min_real = now.getMinutes(); sec_real = now.getSeconds();
+    currentTime = hr_real + min_real / 60 + sec_real / 3600;
+    if(timeSlider) timeSlider.value(currentTime);
+  } else {
+    currentTime = timeSlider.value();
+    hr_real = floor(currentTime); min_real = floor((currentTime % 1) * 60); sec_real = floor(((currentTime * 60) % 1) * 60);
+  }
+  */
+  
+  let now = new Date(); hr_real = now.getHours(); min_real = now.getMinutes(); sec_real = now.getSeconds(); currentTime = hr_real + min_real / 60 + sec_real / 3600;
+
+  // --- Update States ---
+  updateZeppelin();
+
+  // --- Drawing Functions ---
+  drawSkyGradient(currentTime);
+  if (currentTime < 6 || currentTime >= 18) drawStars();
+  drawSunAndMoon(currentTime);
+  drawZeppelin(); // Draw zeppelin behind the city
+  drawCityscape(currentTime, hr_real, min_real, sec_real);
+}
+
+function updateZeppelin() {
+    // Move the zeppelin
+    zeppelinX += zeppelinSpeed * zeppelinDirection;
+
+    // Reverse direction if it goes off-screen
+    if (zeppelinX > width + 120 || zeppelinX < -120) {
+        zeppelinDirection *= -1;
+    }
+
+    // Alternate the text every few seconds
+    if (millis() - lastTextChange > textChangeInterval) {
+        zeppelinText = (zeppelinText === "Nicko G.") ? "Don't Panic" : "Nicko G.";
+        lastTextChange = millis();
+    }
+}
+
+function drawSkyGradient(currentTime) {
+  const nightTop = color(0, 0, 0); const nightBottom = color(25, 25, 112);
+  const sunriseTop = color(252, 228, 236); const sunriseBottom = color(255, 165, 0);
+  const morningTop = color(135, 206, 250); const morningBottom = color(240, 255, 255);
+  const middayTop = color(0, 191, 255); const middayBottom = color(173, 216, 230);
+  const eveningTop = color(255, 69, 0); const eveningBottom = color(139, 69, 19);
+  const sunsetTop = color(255, 140, 0); const sunsetBottom = color(218, 112, 214);
+  let c1, c2;
+  if (currentTime >= 0 && currentTime < 5) { c1 = nightTop; c2 = nightBottom; }
+  else if (currentTime >= 5 && currentTime < 7) { let amt = map(currentTime, 5, 7, 0, 1); c1 = lerpColor(nightTop, sunriseTop, amt); c2 = lerpColor(nightBottom, sunriseBottom, amt); }
+  else if (currentTime >= 7 && currentTime < 11) { let amt = map(currentTime, 7, 11, 0, 1); c1 = lerpColor(sunriseTop, morningTop, amt); c2 = lerpColor(sunriseBottom, morningBottom, amt); }
+  else if (currentTime >= 11 && currentTime < 13) { let amt = map(currentTime, 11, 13, 0, 1); c1 = lerpColor(morningTop, middayTop, amt); c2 = lerpColor(morningBottom, middayBottom, amt); }
+  else if (currentTime >= 13 && currentTime < 16) { c1 = middayTop; c2 = middayBottom; }
+  else if (currentTime >= 16 && currentTime < 18) { let amt = map(currentTime, 16, 18, 0, 1); c1 = lerpColor(middayTop, eveningTop, amt); c2 = lerpColor(middayBottom, eveningBottom, amt); }
+  else if (currentTime >= 18 && currentTime < 20) { let amt = map(currentTime, 18, 20, 0, 1); c1 = lerpColor(eveningTop, sunsetTop, amt); c2 = lerpColor(eveningBottom, sunsetBottom, amt); }
+  else { let amt = map(currentTime, 20, 24, 0, 1); c1 = lerpColor(sunsetTop, nightTop, amt); c2 = lerpColor(sunsetBottom, nightBottom, amt); }
+  setGradient(0, 0, width, height, c1, c2);
+}
+
+function setGradient(x, y, w, h, c1, c2) {
+  noFill();
+  for (let i = y; i <= y + h; i++) {
+    let inter = map(i, y, y + h, 0, 1);
+    let c = lerpColor(c1, c2, inter); stroke(c); line(x, i, x + w, i);
+  }
+}
+
+function drawSunAndMoon(currentTime) {
+  const sunrise = 6; const sunset = 18;
+  if (currentTime > sunrise && currentTime < sunset) {
+    let sunAngle = map(currentTime, sunrise, sunset, PI, TWO_PI);
+    let sunX = width / 2 + cos(sunAngle) * (width / 2.2);
+    let sunY = height * 0.9 + sin(sunAngle) * (height * 1.5);
+    fill(255, 255, 0, 220); noStroke(); ellipse(sunX, sunY, 60, 60);
+  }
+  const moonrise = 18; const moonset = 6;
+  if (currentTime > moonrise || currentTime < moonset) {
+    let timeIntoNight = (currentTime > moonrise) ? currentTime - moonrise : currentTime + (24 - moonrise);
+    let moonAngle = map(timeIntoNight, 0, 12, PI, TWO_PI);
+    let moonX = width / 2 + cos(moonAngle) * (width / 2.2);
+    let moonY = height * 0.9 + sin(moonAngle) * (height * 1.5);
+    fill(240, 240, 240, 200); noStroke(); ellipse(moonX, moonY, 50, 50);
+  }
+}
+
+function drawStars() {
+  randomSeed(starSeed); fill(255, 255, 255, 150); noStroke();
+  for (let i = 0; i < 200; i++) {
+    ellipse(random(width), random(height * 0.6), random(1, 3), random(1, 3));
+  }
+}
+
+function generateWindows(buildingH, buildingW) {
+  let windows = [];
+  const numRows = floor(buildingH / 15); const numCols = floor(buildingW / 18);
+  for (let i = 0; i < numRows; i++) {
+    let row = [];
+    for (let j = 0; j < numCols; j++) { row.push(random() > 0.6 ? 1 : 0); }
+    windows.push(row);
+  }
+  return windows;
+}
+
+function drawCityscape(currentTime, hr, min, sec) {
+  noStroke();
+  for (let b of buildingData) {
+    fill(30, 30, 50);
+    rect(b.x, height - b.height, b.width, b.height);
+    
+    // --- Draw building windows ---
+    if(b.windows.length > 0) {
+      const numRows = b.windows.length; const numCols = b.windows[0].length;
+      let windowHeight = b.height / numRows; let windowWidth = b.width / numCols;
+      for (let row = 0; row < numRows; row++) {
+        for (let col = 0; col < numCols; col++) {
+          let windowY = height - b.height + row * windowHeight + windowHeight * 0.15;
+          
+          // --- Check to prevent windows drawing behind the clock ---
+          if (b.hasClock && windowY < height - b.height + 45) {
+              continue; // Skip drawing this window
+          }
+
+          if (b.windows[row][col] === 1) {
+            let windowX = b.x + col * windowWidth + windowWidth * 0.15;
+            let windowFill = color(255, 255, 102);
+            windowFill.setAlpha((currentTime >= 7 && currentTime < 18) ? 100 : 200);
+            fill(windowFill);
+            rect(windowX, windowY, windowWidth * 0.7, windowHeight * 0.7, 1);
+          }
+        }
+      }
+    }
+    
+    if (b.hasClock) {
+      drawDigitalClock(b.x, height - b.height, b.width, hr, min, sec);
+    }
+  }
+}
+
+function drawDigitalClock(x, y, buildingW, hr, min, sec) {
+  let colon = (sec % 2 === 0) ? ':' : ' ';
+  let timeString = nf(hr, 2) + colon + nf(min, 2);
+  let clockY = y + 30; let clockX = x + buildingW / 2;
+  push();
+  fill(0, 0, 0, 150); noStroke(); rect(clockX - 28, clockY - 20, 56, 25, 3);
+  textFont('monospace'); textSize(18); textAlign(CENTER, CENTER);
+  fill(255, 0, 0);
+  drawingContext.shadowBlur = 15; drawingContext.shadowColor = '#FF4444';
+  text(timeString, clockX, clockY - 7);
+  drawingContext.shadowBlur = 0;
+  pop();
+}
+
+function drawZeppelin() {
+    push();
+    translate(zeppelinX, zeppelinY);
+    // Flip the zeppelin graphics based on direction
+    scale(zeppelinDirection, 1);
+
+    // --- Balloon with Gradient ---
+    let c1 = color(180, 190, 200);
+    let c2 = color(100, 110, 120);
+    noStroke();
+    for (let i = -25; i < 25; i++) {
+        let inter = map(i, -25, 25, 0, 1);
+        let c = lerpColor(c1, c2, inter);
+        fill(c);
+        let r = sqrt(1 - (i*i) / (25*25)); // Equation for ellipse
+        ellipse(0, i, 90 * r, 2); // Made balloon wider
+    }
+
+    // --- Tail Fin ---
+    fill(140, 20, 20);
+    triangle(-40, 0, -60, -15, -60, 15);
+
+    // --- Gondola (cabin) ---
+    fill(80, 80, 90);
+    rect(-20, 20, 40, 10, 3);
+
+    // --- Digital Nameplate ---
+    fill(0, 0, 0, 150);
+    rect(-35, -10, 70, 16, 3); // Made nameplate smaller
+
+    // Green glowing text
+    textFont('monospace'); textSize(12); textAlign(CENTER, CENTER); // Made text smaller
+    fill(50, 255, 50);
+    drawingContext.shadowBlur = 15;
+    drawingContext.shadowColor = '#44FF44';
+    // Flip the text back so it's not mirrored
+    scale(zeppelinDirection, 1); 
+    text(zeppelinText, 0, -2);
+
+    drawingContext.shadowBlur = 0; // Reset shadow
+    pop();
+}
+
+</script>
+</body>
+</html>
+

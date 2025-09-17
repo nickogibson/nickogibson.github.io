@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta property="og:image" content="/TemplateData/Downhill_Skater_Early.jpg" />
     <meta name="twitter:image" content="/TemplateData/Downhill_Skater_Early.jpg" />
+    <!-- This now points to your new SCSS file, which Jekyll compiles to style.css -->
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
     <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css">
 	<link rel="shortcut icon" type="image/png" href="/TemplateData/nicko_cartoon_s.png">
@@ -13,59 +14,54 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
 
-{% seo %}
+    {% seo %}
 
     {% include head-custom.html %}
   </head>
 
   <body>
     <header>
+      <!-- The p5.js cityscape is loaded into an iframe here -->
       <div class="inner">
-        <a href="{{ '/' | absolute_url }}">
-          <h1>{{ site.title | default: site.github.repository_name }}</h1>
-        </a>
-        <h2>{{ site.tagline | default: site.github.project_tagline }}</h2>
-        {% if site.github.is_project_page %}
-          <a href="{{ site.github.repository_url }}" class="button"><small>View project on</small> GitHub</a>
-        {% endif %}
-        {% if site.github.is_user_page %}
-          <a href="{{ site.github.owner_url }}" class="button"><small>Follow me on</small> GitHub</a>
-        {% endif %}
-
+          <iframe id="cityscape-container" src="/cityscape.html"></iframe>
       </div>
     </header>
 
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
+          <!-- Site title and tagline are moved here to be more visible -->
+          <a href="{{ '/' | absolute_url }}">
+            <h1>{{ site.title | default: site.github.repository_name }}</h1>
+          </a>
+          <h2>{{ site.tagline | default: site.github.project_tagline }}</h2>
+          <hr>
+          
           {{ content }}
         </section>
 
         <aside id="sidebar">
-			<div style="display: flex; flex-wrap: wrap; justify-content: center;">
-		  
-				<a href="https://youtube.com/@nickogibson" target="_blank" style="margin: 6px;"><img src= "https://img.shields.io/badge/NickoG-Watch-red?logo=youtube&style=social"></a>
-							
-				<a href="https://deviantart.com/FutureRender" target="_blank" style="margin: 6px;"><img src= "https://img.shields.io/badge/DeviantArt-👀-lightgrey?logo=deviantart&style=social"></a>
-										
-				<a href="https://codepen.io/NickoG" target="_blank" style="margin: 6px;"><img src="https://codepen.io/favicon.ico" width="20" height="20"><img src="https://img.shields.io/badge/Codepen-stuff-green?style=social"> </a>
-				
-				<a href="https://linktr.ee/ngbsn" target="_blank" style="margin: 6px;"><img src="https://img.shields.io/badge/Linktree-more-links?logo=Linktree&style=social"> </a>		
-			</div>
-			<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-				<img src="/TemplateData/nicko_g_drinking_coffee_anime.png" style="max-width: 220px;">
-				<br />
-				I make games & graphics, ride my longboard, and blog some blogs. Making friends on the interwebs!
-				<br />
-				<br />
-				<p>This page was generated with <a href="https://pages.github.com" target="_blank">GitHub Pages</a>.</p>
-				<br />
-				<a href="https://kudos.itch.io" target="_blank"><img src="/TemplateData/kudos_logo.png" style="max-width: 220px;"></a>					
-				<br />	
-				Find me in Discord (Nicko G. :):
-				<a href="https://discord.gg/Nk3DFSmJwy" target="_blank"><img alt="Discord" src="https://img.shields.io/discord/873516357600313435?color=blue&label=Kudos%20Games&logo=discord&style=plastic"></a>
-				<br />						
-			</div>		 
+            <div style="text-align: center;">
+                <img src="/TemplateData/nicko_g_drinking_coffee_anime.png" style="max-width: 220px;">
+                <p>I make games & graphics, ride my longboard, and blog some blogs. Making friends on the interwebs!</p>
+            </div>
+
+            <!-- This is the reorganized "Follow Me" and main links section -->
+            <div class="sidebar-buttons">
+                {% if site.github.is_user_page %}
+                  <a href="{{ site.github.owner_url }}" class="button"><small>Follow me on</small> GitHub</a>
+                {% endif %}
+                <a href="https://kudos.itch.io" target="_blank"><img src="/TemplateData/kudos_logo.png" style="max-width: 220px;"></a>
+                <a href="https://discord.gg/Nk3DFSmJwy" target="_blank"><img alt="Discord" src="https://img.shields.io/discord/873516357600313435?color=blue&label=Kudos%20Games&logo=discord&style=plastic"></a>
+            </div>
+            
+            <!-- This section neatly groups your social media badges -->
+            <div class="social-badges">
+                <a href="https://youtube.com/@nickogibson" target="_blank"><img src= "https://img.shields.io/badge/NickoG-Watch-red?logo=youtube&style=social"></a>
+                <a href="https://deviantart.com/FutureRender" target="_blank"><img src= "https://img.shields.io/badge/DeviantArt-👀-lightgrey?logo=deviantart&style=social"></a>
+                <a href="https://codepen.io/NickoG" target="_blank" style="display: inline-flex; align-items: center; text-decoration: none;"><img src="https://codepen.io/favicon.ico" width="20" height="20"> <img src="https://img.shields.io/badge/Codepen-stuff-green?style=social"></a>
+                <a href="https://linktr.ee/ngbsn" target="_blank"><img src="https://img.shields.io/badge/Linktree-more-links?logo=Linktree&style=social"></a>
+            </div>
         </aside>
       </div>
     </div>
