@@ -2,26 +2,39 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
+    background: #fff; /* A solid background for the content area */
+}
+
+/* --- Background Cityscape Canvas --- */
+#cityscape-canvas-container {
+    position: fixed; /* Fix it to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place it behind everything else */
+    overflow: hidden; /* Hide any scrollbars */
+}
+
+/* --- Theme Overrides --- */
+header {
+    height: 70vh; /* This now just creates space */
+    padding: 0;
+    border-bottom: none; /* Remove border */
+    background: transparent; /* Make it see-through */
 }
 
 #content-wrapper {
-    padding-top: 2rem;
+    position: relative; /* Needed for z-index stacking */
+    background: transparent;
 }
 
-/* --- Header & Cityscape --- */
-header {
-    height: 70vh; /* Set the height of the banner */
-    width: 100%;
-    padding: 0; /* Remove default padding */
-    border-bottom: 1px solid #ddd;
-    background: #000; /* Fallback color */
+.inner.clearfix {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background for readability */
+    border-radius: 8px;
 }
 
-/* Make the canvas container fill the header */
-#cityscape-canvas-container {
-    width: 100%;
-    height: 100%;
-}
 
 /* --- Main Content & Typography --- */
 #main-content h1, #main-content h2, #main-content h3 {
@@ -42,7 +55,7 @@ header {
     text-align: center;
 }
 
-/* Correctly size the profile picture */
+/* Definitive fix for the profile picture */
 #sidebar .profile-pic {
     max-width: 220px;
     width: 100%;

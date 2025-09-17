@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css">
     <link rel="shortcut icon" type="image/png" href="/TemplateData/nicko_cartoon_s.png">
     
-    <!-- Include the P5.js library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 
     <!--[if lt IE 9]>
@@ -23,10 +22,11 @@
   </head>
 
   <body>
-    <header>
-      <!-- The P5.js canvas will be created inside this container -->
-      <div id="cityscape-canvas-container"></div>
-    </header>
+    <!-- The canvas container is now a background layer for the whole page -->
+    <div id="cityscape-canvas-container"></div>
+
+    <!-- The theme's original header. We will make this transparent. -->
+    <header></header>
 
     <div id="content-wrapper">
       <div class="inner clearfix">
@@ -55,90 +55,63 @@
       </div>
     </div>
 
-    <!-- The entire P5.js cityscape sketch is now here -->
     <script>
       function sketch(p) {
         let zeppelinX, zeppelinY, zeppelinDirection;
         let buildingData = [];
         let starSeed;
         let nameplateText = "Nicko G.";
-
-        // --- Time Slider (Commented Out for Testing) ---
-        // let timeSlider;
-        // let syncButton;
         let isRealTime = true;
 
         p.setup = function() {
           const container = document.getElementById('cityscape-canvas-container');
-          const canvas = p.createCanvas(container.offsetWidth, container.offsetHeight);
+          const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
           canvas.parent('cityscape-canvas-container');
-
-          // --- UI (Commented Out) ---
-          /*
-          let uiContainer = p.createDiv();
-          uiContainer.style('position', 'absolute');
-          uiContainer.style('bottom', '10px');
-          uiContainer.style('left', '50%');
-          uiContainer.style('transform', 'translateX(-50%)');
-          uiContainer.style('width', '80%');
-          uiContainer.style('max-width', '800px');
-          
-          timeSlider = p.createSlider(0, 24, 0, 0.01);
-          timeSlider.parent(uiContainer);
-          timeSlider.style('width', 'calc(100% - 150px)');
-          timeSlider.input(() => { isRealTime = false; });
-          
-          syncButton = p.createButton('Sync to Real-Time');
-          syncButton.parent(uiContainer);
-          syncButton.mousePressed(() => { isRealTime = true; });
-          */
           
           starSeed = p.floor(p.random(1000));
           zeppelinX = p.width / 2;
-          zeppelinY = p.height * 0.25;
+          zeppelinY = p.height * 0.2; // Adjusted for full screen
           zeppelinDirection = 0.5;
 
-          // Static building data for consistent layout
           buildingData = [
-            { x: 0, w: 80, h: p.random(150, 250) }, { x: 80, w: 60, h: p.random(180, 280) },
-            { x: 140, w: 90, h: p.random(120, 220) }, { x: 230, w: 70, h: p.random(200, 300) },
-            { x: 300, w: 100, h: 400 }, // Clock tower
-            { x: 400, w: 80, h: p.random(220, 320) }, { x: 480, w: 100, h: p.random(150, 250) },
-            { x: 580, w: 70, h: p.random(180, 280) }, { x: 650, w: 90, h: p.random(160, 260) },
-            { x: 740, w: 60, h: p.random(190, 290) }
+            { w: p.width * 0.1, h: p.random(150, 250) }, { w: p.width * 0.08, h: p.random(180, 280) },
+            { w: p.width * 0.12, h: p.random(120, 220) }, { w: p.width * 0.09, h: p.random(200, 300) },
+            { w: p.width * 0.13, h: 400 }, // Clock tower
+            { w: p.width * 0.1, h: p.random(220, 320) }, { w: p.width * 0.12, h: p.random(150, 250) },
+            { w: p.width * 0.09, h: p.random(180, 280) }, { w: p.width * 0.1, h: p.random(160, 260) },
           ];
-
-          // Generate windows for each building
+          
+          let totalWidth = buildingData.reduce((acc, b) => acc + b.w, 0);
+          let currentX = (p.width - totalWidth) / 2;
           buildingData.forEach(b => {
-            b.windows = generateWindows(p.floor(b.h / 15), p.floor(b.w / 15));
+              b.x = currentX;
+              currentX += b.w;
+              b.windows = generateWindows(p.floor(b.h / 15), p.floor(b.w / 15));
           });
           
-          // Change nameplate text every 4 seconds
           setInterval(() => {
             nameplateText = (nameplateText === "Nicko G.") ? "Don't Panic" : "Nicko G.";
           }, 4000);
         };
         
         p.windowResized = function() {
-            const container = document.getElementById('cityscape-canvas-container');
-            p.resizeCanvas(container.offsetWidth, container.offsetHeight);
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
+            // Re-calculate building positions on resize
+            let totalWidth = buildingData.reduce((acc, b) => acc + b.w, 0);
+            let currentX = (p.width - totalWidth) / 2;
+            buildingData.forEach(b => {
+                b.x = currentX;
+                currentX += b.w;
+            });
         }
 
         p.draw = function() {
-          let currentTime;
-          if (isRealTime) {
-            currentTime = p.hour() + p.minute() / 60 + p.second() / 3600;
-            // if (timeSlider) timeSlider.value(currentTime);
-          } else {
-            // currentTime = timeSlider.value();
-          }
+          let currentTime = p.hour() + p.minute() / 60 + p.second() / 3600;
 
           drawSkyGradient(currentTime);
 
-          if (currentTime < 6 || currentTime >= 18) {
-            drawStars();
-          }
-
+          if (currentTime < 6 || currentTime >= 18) drawStars();
+          
           drawSunAndMoon(currentTime);
           drawCityscape(currentTime);
           drawZeppelin();
@@ -169,154 +142,65 @@
             setGradient(0, 0, p.width, p.height, c1, c2);
         }
 
-        function setGradient(x, y, w, h, c1, c2) {
-            p.noFill();
-            for (let i = y; i <= y + h; i++) {
-                let inter = p.map(i, y, y + h, 0, 1);
-                let c = p.lerpColor(c1, c2, inter);
-                p.stroke(c);
-                p.line(x, i, x + w, i);
-            }
-        }
+        function setGradient(x, y, w, h, c1, c2) { p.noFill(); for (let i = y; i <= y + h; i++) { let inter = p.map(i, y, y + h, 0, 1); let c = p.lerpColor(c1, c2, inter); p.stroke(c); p.line(x, i, x + w, i); } }
 
         function drawSunAndMoon(currentTime) {
             const sunrise = 6, sunset = 18;
             if (currentTime > sunrise && currentTime < sunset) {
                 let sunAngle = p.map(currentTime, sunrise, sunset, p.PI, p.TWO_PI);
                 let sunX = p.width / 2 + p.cos(sunAngle) * (p.width / 2.2);
-                let sunY = p.height - 50 + p.sin(sunAngle) * (p.height / 1.5);
-                p.fill(255, 255, 0, 220);
-                p.noStroke();
-                p.ellipse(sunX, sunY, 60, 60);
+                let sunY = p.height * 0.9 + p.sin(sunAngle) * (p.height / 1.5);
+                p.fill(255, 255, 0, 220); p.noStroke(); p.ellipse(sunX, sunY, 60, 60);
             }
-            const moonrise = 18, moonset = 6;
-            if (currentTime > moonrise || currentTime < moonset) {
-                let timeIntoNight = (currentTime > moonrise) ? currentTime - moonrise : currentTime + (24 - moonrise);
+            if (currentTime > 18 || currentTime < 6) {
+                let timeIntoNight = (currentTime > 18) ? currentTime - 18 : currentTime + 6;
                 let moonAngle = p.map(timeIntoNight, 0, 12, p.PI, p.TWO_PI);
                 let moonX = p.width / 2 + p.cos(moonAngle) * (p.width / 2.2);
-                let moonY = p.height - 50 + p.sin(moonAngle) * (p.height / 1.5);
-                p.fill(240, 240, 240, 200);
-                p.noStroke();
-                p.ellipse(moonX, moonY, 50, 50);
+                let moonY = p.height * 0.9 + p.sin(moonAngle) * (p.height / 1.5);
+                p.fill(240, 240, 240, 200); p.noStroke(); p.ellipse(moonX, moonY, 50, 50);
             }
         }
         
-        function drawStars() {
-            p.randomSeed(starSeed);
-            p.fill(255, 255, 255, 150);
-            p.noStroke();
-            for (let i = 0; i < (p.width * p.height) / 3000; i++) {
-                let x = p.random(p.width);
-                let y = p.random(p.height * 0.7);
-                let size = p.random(1, 3);
-                p.ellipse(x, y, size, size);
-            }
-        }
+        function drawStars() { p.randomSeed(starSeed); p.fill(255, 255, 255, 150); p.noStroke(); for (let i = 0; i < (p.width * p.height) / 3000; i++) { p.ellipse(p.random(p.width), p.random(p.height * 0.7), p.random(1, 3), p.random(1, 3)); } }
 
-        function generateWindows(numRows, numCols) {
-            let windows = [];
-            for (let i = 0; i < numRows; i++) {
-                let row = [];
-                for (let j = 0; j < numCols; j++) {
-                    row.push(p.random() > 0.6 ? 1 : 0);
-                }
-                windows.push(row);
-            }
-            return windows;
-        }
+        function generateWindows(numRows, numCols) { let w = []; for (let i = 0; i < numRows; i++) { let r = []; for (let j = 0; j < numCols; j++) { r.push(p.random() > 0.6 ? 1 : 0); } w.push(r); } return w; }
 
         function drawCityscape(currentTime) {
             p.noStroke();
-            let cityWidth = buildingData.reduce((acc, b) => acc + b.w, 0);
-            let startX = (p.width - cityWidth) / 2;
-            
             buildingData.forEach(b => {
                 p.fill(30, 30, 50);
-                p.rect(startX + b.x, p.height - b.h, b.w, b.h);
+                p.rect(b.x, p.height - b.h, b.w, b.h);
 
-                if (b.h === 400) { // Clock tower
-                  drawClock(startX + b.x + b.w / 2, p.height - b.h + 60, currentTime);
-                }
-
+                if (b.h === 400) drawClock(b.x + b.w / 2, p.height - b.h + 60, currentTime);
+                
                 let windowHeight = 10, windowWidth = 8, gap = 4;
                 for (let r = 0; r < b.windows.length; r++) {
                     for (let c = 0; c < b.windows[r].length; c++) {
                         let yPos = p.height - b.h + (r * (windowHeight + gap)) + 20;
-                        if (b.h === 400 && yPos < p.height - b.h + 150) continue; // No windows behind clock
+                        if (b.h === 400 && yPos < p.height - b.h + 150) continue;
                         if (b.windows[r][c] === 1) {
-                            let xPos = startX + b.x + (c * (windowWidth + gap)) + gap;
-                            let windowFill = p.color(255, 255, 102);
-                            windowFill.setAlpha((currentTime >= 7 && currentTime < 18) ? 100 : 200);
-                            p.fill(windowFill);
-                            p.rect(xPos, yPos, windowWidth, windowHeight);
+                            let xPos = b.x + (c * (windowWidth + gap)) + gap;
+                            let wFill = p.color(255, 255, 102);
+                            wFill.setAlpha((currentTime >= 7 && currentTime < 18) ? 100 : 200);
+                            p.fill(wFill); p.rect(xPos, yPos, windowWidth, windowHeight);
                         }
                     }
                 }
             });
         }
         
-        function drawClock(x, y, currentTime) {
-            p.push();
-            let hr = p.floor(currentTime);
-            let min = p.floor((currentTime - hr) * 60);
-            
-            p.fill(10, 10, 10, 180);
-            p.noStroke();
-            p.rectMode(p.CENTER);
-            p.rect(x, y, 80, 40, 5);
-
-            p.fill(255, 0, 0);
-            p.textFont('monospace', 32);
-            p.textAlign(p.CENTER, p.CENTER);
-            let timeString = p.nf(hr, 2) + " " + p.nf(min, 2);
-            
-            // Blinking colon effect
-            if (p.second() % 2 === 0) {
-              timeString = p.nf(hr, 2) + ":" + p.nf(min, 2);
-            }
-            
-            p.text(timeString, x, y);
-            p.pop();
-        }
+        function drawClock(x, y, currentTime) { p.push(); let hr = p.floor(currentTime); let min = p.floor((currentTime - hr) * 60); p.fill(10, 10, 10, 180); p.noStroke(); p.rectMode(p.CENTER); p.rect(x, y, 80, 40, 5); p.fill(255, 0, 0); p.textFont('monospace', 32); p.textAlign(p.CENTER, p.CENTER); let timeString = p.second() % 2 === 0 ? p.nf(hr, 2) + ":" + p.nf(min, 2) : p.nf(hr, 2) + " " + p.nf(min, 2); p.text(timeString, x, y); p.pop(); }
 
         function drawZeppelin() {
             let zepW = 140, zepH = 50;
-            p.push();
-            p.translate(zeppelinX, zeppelinY);
-            
-            // Tail fin
-            p.fill(200, 0, 0);
-            p.noStroke();
-            let finX = zeppelinDirection > 0 ? -zepW/2 : zepW/2;
-            p.triangle(finX, 0, finX - 20 * zeppelinDirection, -15, finX - 20 * zeppelinDirection, 15);
-
-            // Balloon
-            let c1 = p.color(220, 220, 255);
-            let c2 = p.color(150, 150, 180);
-            for (let i = 0; i < zepH; i++) {
-                let inter = p.map(i, 0, zepH, 0, 1);
-                let c = p.lerpColor(c1, c2, inter);
-                p.stroke(c);
-                p.line(-zepW/2, -zepH/2 + i, zepW/2, -zepH/2 + i);
-            }
+            p.push(); p.translate(zeppelinX, zeppelinY);
+            p.fill(200, 0, 0); p.noStroke(); let finX = zeppelinDirection > 0 ? -zepW/2 : zepW/2; p.triangle(finX, 0, finX - 20 * zeppelinDirection, -15, finX - 20 * zeppelinDirection, 15);
+            let c1 = p.color(220, 220, 255); let c2 = p.color(150, 150, 180); for (let i = 0; i < zepH; i++) { let inter = p.map(i, 0, zepH, 0, 1); p.stroke(p.lerpColor(c1, c2, inter)); p.line(-zepW/2, -zepH/2 + i, zepW/2, -zepH/2 + i); }
             p.noFill(); p.stroke(100); p.ellipse(0, 0, zepW, zepH);
-            
-            // Gondola
             p.fill(80); p.rect(-30, zepH/2, 60, 15, 3);
-            
-            // Nameplate
-            p.fill(10, 10, 10, 180); p.rectMode(p.CENTER);
-            p.rect(0, 0, 110, 25, 3);
-            p.fill(50, 255, 50); p.textFont('monospace', 18);
-            p.textAlign(p.CENTER, p.CENTER);
-            p.text(nameplateText, 0, 0);
-            
+            p.fill(10, 10, 10, 180); p.rectMode(p.CENTER); p.rect(0, 0, 110, 25, 3); p.fill(50, 255, 50); p.textFont('monospace', 18); p.textAlign(p.CENTER, p.CENTER); p.text(nameplateText, 0, 0);
             p.pop();
-
-            zeppelinX += zeppelinDirection;
-            if (zeppelinX > p.width - zepW/2 || zeppelinX < zepW/2) {
-                zeppelinDirection *= -1;
-            }
+            zeppelinX += zeppelinDirection; if (zeppelinX > p.width - zepW/2 || zeppelinX < zepW/2) zeppelinDirection *= -1;
         }
       }
       new p5(sketch);
