@@ -11,7 +11,7 @@ Some new 3D objects on my sketchfab. Not everything is a.i, I made the food item
 Text to 3D generation is getting pretty good, I'm using Meshy, but the main thing I need, clothing for my characters, is still very tough to do.  
  
 # For those who love the sun
-I like making sun related swag, check this out  
+I like making sun related swag, check this out , from my <a href="https://www.redbubble.com/people/NickoGibson/shop">RedBubble Shop</a>   
 
 {% include image-grid.html images = 
   "kokopelli173909758-throw-pillow.jpg,

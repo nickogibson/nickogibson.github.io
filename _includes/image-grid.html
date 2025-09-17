@@ -34,9 +34,9 @@
   {% assign images = include.images | split: ',' %}
   {% for image_name in images %}
     {% assign clean_name = image_name | strip %}
-    {% assign alt_text = clean_name | remove: '.jpg' | replace: '-', ' ' | replace: 'sol invictus', 'Sol Invictus' | replace: 'dark sun praise', 'Dark Sun Praise' | capitalize %}
+    {% assign alt_text = clean_name | remove: '.jpg' | replace: '-', ' ' | capitalize %}
     <li>
-      <a href="{{ site.baseurl }}/assets/{{ clean_name }}">
+      <a href="{{ site.baseurl }}/TemplateData/{{ clean_name }}">
         <img src="{{ site.baseurl }}/assets/{{ clean_name }}" alt="{{ alt_text }}">
       </a>
       <p class="caption">{{ alt_text }}</p>
