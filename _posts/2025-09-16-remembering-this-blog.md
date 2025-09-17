@@ -6,10 +6,10 @@ categories: blog
 ---
 It has been a while since I updated this page.  
   
-What's new recently? The game cosmic storm on kudos.itch.io is the latest live game.  
+The game ## [Cosmic Storm](https://kudos.itch.io/cosmic-storm) is my latest live game.  
 It was a fun little project to learn the Godot engine.  
-Some new 3D objects on my sketchfab. Not everything is a.i, I made the food items from scratch to practice.  
-Text to 3D generation is getting pretty good, I'm using Meshy, but the main thing I need, clothing for my characters, is still very tough to do.
+Some new 3D objects on my [sketchfab](https://sketchfab.com/nickogibson). Not everything is a.i, I made the food items from scratch to practice.  
+Text to 3D generation is getting pretty good, I'm using Meshy, but the main thing I need is clothing for my characters, which is still very tough to do.
 
 
 # For those who love the sun
@@ -24,8 +24,8 @@ I like making sun related swag, check this out, from my [RedBubble Shop](https:/
   dark sun praise-essential-t-shirt.jpg"
 %}
 
-<a href="https://linktr.ee/sundawgs">Praise the Sun with Sundawgs</a>  
-music, art, more.
+## 🌞 <a href="https://linktr.ee/sundawgs">Praise the Sun with Sundawgs</a>  
+My collection of music, artwork, books, and more.
 
 Did you come here for the [SFX Mixer](https://nickogibson.github.io/SFX-Mixer/)?
 <div
