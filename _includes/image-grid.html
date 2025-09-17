@@ -48,8 +48,9 @@
   }
   .modal-content {
     position: relative;
-    max-width: 90%;
-    max-height: 90%;
+    /* This section ensures the image is not bigger than the window */
+    max-width: 90vw; /* 90% of the viewport width */
+    max-height: 90vh; /* 90% of the viewport height */
     animation: zoomIn 0.3s ease-out;
   }
   .modal-content img {
