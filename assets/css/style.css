@@ -1,10 +1,9 @@
 ---
 # this space intentionally left blank
 ---
-/* General Body Fixes */
 body {
-  background-color: transparent; /* Allows canvas to show through */
-  overflow-x: hidden; /* This is the fix! Prevents horizontal scrollbar */
+  background-color: transparent; 
+  overflow-x: hidden; 
 }
 
 /* Canvas Container */
@@ -12,12 +11,12 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; /* Use viewport width */
-  height: 100vh; /* Use viewport height */
-  z-index: -1; /* Place it behind all other content */
+  width: 100vw; 
+  height: 100vh; 
+  z-index: -1; 
 }
 
-/* Header Styling - HIDE the theme's header completely */
+
 header {
   display: none !important;
 }
