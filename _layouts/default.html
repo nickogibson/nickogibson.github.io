@@ -38,9 +38,7 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-            {% if page.url == '/' %}
-              {{ site.title }}
-            {% else %}
+            {% if page.url != '/' %}
               <a href="/">/Home</a>
             {% endif %}
           </h1>
