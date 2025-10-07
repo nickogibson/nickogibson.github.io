@@ -1,4 +1,3 @@
-<!-- DEBUG: page.layout = {{ page.layout }} -->
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
@@ -29,18 +28,15 @@
 
   <body>
  
-
- 
     {% if page.url == '/' %}
- 
+    <div id="cityscape-canvas-container"></div>
+    {% endif %}
 
  
+
     <div id="content-wrapper">
- 
       <div class="inner clearfix">
- 
         <section id="main-content">
- 
           <h1>
             {% if page.url == '/' %}
               {{ site.title }}
@@ -48,480 +44,231 @@
               <a href="/">/Home</a>
             {% endif %}
           </h1>
- 
           {{ content }}
- 
         </section>
- 
 
- 
         <aside id="sidebar">
- 
             <a href="/"><img src="/TemplateData/nicko_g_anime.png" alt="Cartoon of Nicko G." class="profile-pic"></a>
- 
             
- 
             <p>I make games & graphics, ride my longboard, and blog some blogs. Making friends on the interwebs!</p>
- 
             
- 
             <div class="sidebar-buttons">
- 
                 <a href="{{ site.github.owner_url }}" class="button"><small>Follow me on</small> GitHub</a>
- 
                 <a href="https://kudos.itch.io" target="_blank"><img src="/TemplateData/kudos_logo.png" alt="Kudos Games on Itch.io"></a>					
- 
                 <a href="https://discord.gg/Nk3DFSmJwy" target="_blank"><img alt="Discord" src="https://img.shields.io/discord/873516357600313435?color=blue&label=Kudos%20Games&logo=discord&style=plastic"></a>
- 
             </div>
- 
             
- 
             <div class="social-badges">
- 
                 <a href="https://youtube.com/@nickogibson" target="_blank"><img src= "https://img.shields.io/badge/NickoG-Watch-red?logo=youtube&style=social" alt="YouTube"></a>
- 
                 <a href="https://deviantart.com/FutureRender" target="_blank"><img src= "https://img.shields.io/badge/DeviantArt-👀-lightgrey?logo=deviantart&style=social" alt="DeviantArt"></a>
- 
                 <a href="https://codepen.io/NickoG" target="_blank"><img src="https://img.shields.io/badge/Codepen-stuff-green?style=social&logo=codepen" alt="CodePen"> </a>
- 
                 <a href="https://linktr.ee/ngbsn" target="_blank"><img src="https://img.shields.io/badge/Linktree-more-links?logo=Linktree&style=social" alt="Linktree"> </a>		
- 
             </div>			
- 
         </aside>
- 
       </div>
- 
     </div>
- 
 
- 
- 
     <script>
- 
-      // Simple script to hide placeholder and show canvas when p5 is ready
- 
-      document.addEventListener("DOMContentLoaded", function() {
- 
-        var placeholder = document.getElementById('banner-placeholder');
- 
-        var canvasContainer = document.getElementById('cityscape-canvas-container');
- 
- 
-        setTimeout(function() {
- 
-          placeholder.style.display = 'none';
- 
-          canvasContainer.style.display = 'block';
- 
-        }, 500);
- 
-      });
- 
-
- 
       function sketch(p) {
- 
         let zeppelinX, zeppelinY, zeppelinDirection;
- 
         let buildingData = [];
- 
         let starSeed;
- 
         let nameplateText = "Nicko G.";
- 
         let isRealTime = true;
- 
 
- 
         p.setup = function() {
- 
           const container = document.getElementById('cityscape-canvas-container');
- 
           const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
- 
           canvas.parent('cityscape-canvas-container');
- 
           
- 
           starSeed = p.floor(p.random(1000));
- 
           zeppelinX = p.width / 2;
- 
           zeppelinY = p.height * 0.2;
- 
           zeppelinDirection = 0.5;
- 
           
- 
           createCityscape();
- 
           
- 
           setInterval(() => {
- 
             nameplateText = (nameplateText === "Nicko G.") ? "Don't Panic" : "Nicko G.";
- 
           }, 4000);
- 
         };
- 
         
- 
         function createCityscape() {
- 
-            buildingData = []; 
- 
-            const buildingWidths = [70, 90, 110, 80, 100]; 
- 
-            const clockTowerWidth = 120;
- 
+            buildingData = []; // Clear old data
+            const buildingWidths = [70, 90, 110, 80, 100]; // Pool of thinner fixed widths
+            const clockTowerWidth = 120; // Thinner clock tower
 
- 
             const cityFillPercentage = 0.7;
- 
             const targetCityWidth = p.width * cityFillPercentage;
- 
             const cityStartX = (p.width - targetCityWidth) / 2;
- 
             const cityEndX = cityStartX + targetCityWidth;
- 
 
- 
-            // Place the Clock Tower in the center of the canvas
- 
+            // 1. Place the Clock Tower in the absolute center of the canvas
             const clockTowerX = (p.width - clockTowerWidth) / 2;
- 
             buildingData.push({
- 
                 x: clockTowerX,
- 
                 w: clockTowerWidth,
- 
                 h: 400, // Tallest building
- 
                 windows: generateWindows(400, clockTowerWidth)
- 
             });
- 
 
-            //  Generate buildings to the right, stopping at the 70% boundary
- 
+            // 2. Generate buildings to the right, stopping at the 70% boundary
             let currentX = clockTowerX + clockTowerWidth;
- 
             while (currentX < cityEndX) {
- 
                 let newWidth = p.random(buildingWidths);
- 
                 if (currentX + newWidth > cityEndX) {
- 
                     newWidth = cityEndX - currentX;
- 
                 }
- 
                 if (newWidth < 40) break;
- 
+
                 let newHeight = p.random(150, 320);
- 
                 buildingData.push({
- 
                     x: currentX,
- 
                     w: newWidth,
- 
                     h: newHeight,
- 
                     windows: generateWindows(newHeight, newWidth)
- 
                 });
- 
                 currentX += newWidth;
- 
             }
- 
 
-            // Generate buildings to the left, stopping at the 70% boundary
- 
+            // 3. Generate buildings to the left, stopping at the 70% boundary
             currentX = clockTowerX;
- 
             while (currentX > cityStartX) {
- 
                 let newWidth = p.random(buildingWidths);
- 
                 let newX = currentX - newWidth;
- 
                 if (newX < cityStartX) {
- 
                     newWidth = currentX - cityStartX;
- 
                     newX = cityStartX;
- 
                 }
- 
                 if (newWidth < 40) break;
- 
 
- 
                 let newHeight = p.random(150, 320);
- 
                 buildingData.push({
- 
                     x: newX,
- 
                     w: newWidth,
- 
                     h: newHeight,
- 
                     windows: generateWindows(newHeight, newWidth)
- 
                 });
- 
                 currentX = newX;
- 
             }
- 
         }
- 
 
- 
         p.windowResized = function() {
- 
             p.resizeCanvas(p.windowWidth, p.windowHeight);
- 
-            createCityscape(); 
- 
+            createCityscape(); // Re-create the city with new dimensions
         }
- 
 
- 
         p.draw = function() {
- 
           let currentTime = p.hour() + p.minute() / 60 + p.second() / 3600;
- 
 
- 
           drawSkyGradient(currentTime);
- 
           if (currentTime < 6 || currentTime >= 18) drawStars();
- 
           drawSunAndMoon(currentTime);
- 
           drawCityscape(currentTime);
- 
           drawZeppelin();
- 
         };
- 
 
- 
         function drawSkyGradient(currentTime) {
- 
             const nightTop=p.color(0,0,0),nightBottom=p.color(25,25,112),sunriseTop=p.color(252,228,236),sunriseBottom=p.color(255,165,0),morningTop=p.color(135,206,250),morningBottom=p.color(240,255,255),middayTop=p.color(0,191,255),middayBottom=p.color(173,216,230),eveningTop=p.color(255,69,0),eveningBottom=p.color(139,69,19),sunsetTop=p.color(255,140,0),sunsetBottom=p.color(218,112,214);let c1,c2;if(currentTime>=0&&currentTime<5){c1=nightTop;c2=nightBottom}else if(currentTime>=5&&currentTime<7){let a=p.map(currentTime,5,7,0,1);c1=p.lerpColor(nightTop,sunriseTop,a);c2=p.lerpColor(nightBottom,sunriseBottom,a)}else if(currentTime>=7&&currentTime<11){let a=p.map(currentTime,7,11,0,1);c1=p.lerpColor(sunriseTop,morningTop,a);c2=p.lerpColor(sunriseBottom,morningBottom,a)}else if(currentTime>=11&&currentTime<13){let a=p.map(currentTime,11,13,0,1);c1=p.lerpColor(morningTop,middayTop,a);c2=p.lerpColor(morningBottom,middayBottom,a)}else if(currentTime>=13&&currentTime<16){c1=middayTop;c2=middayBottom}else if(currentTime>=16&&currentTime<18){let a=p.map(currentTime,16,18,0,1);c1=p.lerpColor(middayTop,eveningTop,a);c2=p.lerpColor(middayBottom,eveningBottom,a)}else if(currentTime>=18&&currentTime<20){let a=p.map(currentTime,18,20,0,1);c1=p.lerpColor(eveningTop,sunsetTop,a);c2=p.lerpColor(eveningBottom,sunsetBottom,a)}else{let a=p.map(currentTime,20,24,0,1);c1=p.lerpColor(sunsetTop,nightTop,a);c2=p.lerpColor(sunsetBottom,nightBottom,a)}setGradient(0,0,p.width,p.height,c1,c2);
- 
         }
- 
 
- 
         function setGradient(x,y,w,h,c1,c2){p.noFill();for(let i=y;i<=y+h;i++){let a=p.map(i,y,y+h,0,1),t=p.lerpColor(c1,c2,a);p.stroke(t);p.line(x,i,x+w,i)}}
- 
 
- 
         function drawSunAndMoon(currentTime) {
- 
             const sunrise=6,sunset=18;if(currentTime>sunrise&&currentTime<sunset){let a=p.map(currentTime,sunrise,sunset,p.PI,p.TWO_PI),t=p.width/2+p.cos(a)*(p.width/2.2),e=p.height*.9+p.sin(a)*(p.height/1.5);p.fill(255,255,0,220);p.noStroke();p.ellipse(t,e,60,60)}if(currentTime>18||currentTime<6){let a=currentTime>18?currentTime-18:currentTime+6,t=p.map(a,0,12,p.PI,p.TWO_PI),e=p.width/2+p.cos(t)*(p.width/2.2),o=p.height*.9+p.sin(t)*(p.height/1.5);p.fill(240,240,240,200);p.noStroke();p.ellipse(e,o,50,50)}
- 
         }
- 
         
- 
         function drawStars(){p.randomSeed(starSeed);p.fill(255,255,255,150);p.noStroke();for(let a=0;a<p.width*p.height/3e3;a++)p.ellipse(p.random(p.width),p.random(p.height*.7),p.random(1,3),p.random(1,3))}
- 
         
- 
         function generateWindows(buildingHeight, buildingWidth){
- 
             let windows = [];
- 
             const windowHeight = 10, windowWidth = 8, hGap = 4, vGap = 4;
- 
             const numRows = p.floor((buildingHeight - vGap * 2) / (windowHeight + vGap));
- 
             const numCols = p.floor((buildingWidth - hGap * 2) / (windowWidth + hGap));
- 
             
- 
             for(let r = 0; r < numRows; r++){
- 
                 let row = [];
- 
                 for(let c = 0; c < numCols; c++){
- 
                     row.push(p.random() > 0.6 ? 1 : 0);
- 
                 }
- 
                 windows.push(row);
- 
             }
- 
             return windows;
- 
         }
- 
 
- 
         function drawCityscape(currentTime) {
- 
             p.noStroke();
- 
             buildingData.forEach(b => {
- 
                 p.fill(30, 30, 50);
- 
                 p.rect(b.x, p.height - b.h, b.w, b.h);
- 
                 
- 
                 let windowHeight = 10, windowWidth = 8, hGap = 4, vGap = 4;
- 
                 for (let r = 0; r < b.windows.length; r++) {
- 
                     for (let c = 0; c < b.windows[r].length; c++) {
- 
                         if (b.windows[r][c] === 1) {
- 
                             let yPos = p.height - b.h + (r * (windowHeight + vGap)) + vGap*2;
- 
                             let xPos = b.x + (c * (windowWidth + hGap)) + hGap*2;
- 
                             
- 
                             let wFill = p.color(255, 255, 102);
- 
                             wFill.setAlpha((currentTime >= 7 && currentTime < 18) ? 100 : 200);
- 
                             p.fill(wFill); p.rect(xPos, yPos, windowWidth, windowHeight);
- 
                         }
- 
                     }
- 
                 }
- 
                 // Draw clock on tallest building
- 
                 if (b.h === 400) drawClock(b.x + b.w / 2, p.height - b.h + 55, currentTime);
- 
             });
- 
         }
- 
         
- 
         function drawClock(x,y,currentTime){p.push();let a=p.floor(currentTime),t=p.floor(60*(currentTime-a));p.fill(0);p.noStroke();p.rectMode(p.CENTER);p.rect(x,y,83,40,5);p.fill(255,0,0);p.textFont("monospace",28);p.textAlign(p.CENTER,p.CENTER);let e=p.second()%2==0?p.nf(a,2)+":"+p.nf(t,2):p.nf(a,2)+" "+p.nf(t,2);p.text(e,x,y+2);p.pop()}
- 
 
- 
         function drawZeppelin() {
- 
             let zepW = 140, zepH = 50;
- 
             p.push();
- 
             p.translate(zeppelinX, zeppelinY);
- 
             
- 
             // Tail fin
- 
             p.fill(200, 0, 0); p.noStroke();
- 
             let finX = zeppelinDirection > 0 ? -zepW/2 : zepW/2;
- 
             p.triangle(finX, 0, finX - 20 * zeppelinDirection, -15, finX - 20 * zeppelinDirection, 15);
- 
 
- 
             // Balloon 
- 
             p.noStroke();
- 
             let c1 = p.color(220, 220, 255); let c2 = p.color(150, 150, 180);
- 
             for (let i = -zepH/2; i < zepH/2; i++) {
- 
                 let inter = p.map(i, -zepH/2, zepH/2, 0, 1);
- 
                 let currentY = i;
- 
                 let r = zepW / 2;
- 
                 let x = r * p.sqrt(1 - (currentY*currentY) / ((zepH/2)*(zepH/2)));
- 
                 p.stroke(p.lerpColor(c1, c2, inter));
- 
                 p.line(-x, currentY, x, currentY);
- 
             }
- 
             p.noFill(); p.stroke(100); p.ellipse(0, 0, zepW, zepH);
- 
             
- 
             // Gondola
- 
             p.fill(80); p.noStroke(); 
- 
             p.rectMode(p.CENTER);
- 
             p.rect(0, zepH/2 - 5, 60, 15, 3);
- 
             
- 
             // Gondola Windows
- 
             p.fill(255, 255, 102, 180);
- 
             p.rect(-18, zepH/2 - 5, 8, 5, 1);
- 
             p.rect(-4, zepH/2 - 5, 8, 5, 1);
- 
             p.rect(10, zepH/2 - 5, 8, 5, 1);
- 
 
- 
             // Nameplate
- 
             p.fill(10, 10, 10, 180); 
- 
             p.rect(0, 0, 105, 22, 3);
- 
             p.fill(50, 255, 50); p.textFont('monospace', 16);
- 
             p.textAlign(p.CENTER, p.CENTER);
- 
             p.text(nameplateText, 0, 1);
- 
             
- 
             p.pop();
- 
             zeppelinX += zeppelinDirection;
- 
             if (zeppelinX > p.width - zepW/2 || zeppelinX < zepW/2) zeppelinDirection *= -1;
- 
         }
- 
       }
- 
       new p5(sketch);
- 
     </script>
- 
-    {% endif %}
- 
   </body>
- 
 </html>
- 
