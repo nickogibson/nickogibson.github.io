@@ -23,62 +23,7 @@
 
     {% include head-custom.html %}
 	
-  <style>
-        /* General Body Fixes */
-        body {
-          background-color: transparent; /* Allows canvas to show through */
-          overflow-x: hidden; /*  Prevents horizontal scrollbar */
-        }
 
-        /* Canvas Container 
-        #cityscape-canvas-container {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw; /* Use viewport width */
-          height: 100vh; /* Use viewport height */
-          z-index: -1; /* Place it behind all other content */
-        }*/
-
-        /* Header Styling - HIDE the theme's header completely */
-        header {
-          display: none !important;
-        }
-
-        /* Main Content Readability 
-        #main-content {
-          background: rgba(255, 255, 255, 0.92); /* Semi-transparent white background */
-          padding: 2em;
-          border-radius: 12px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-          margin-top: 70vh; /* Push content down to clear the cityscape */
-        }*/
-
-        /* Sidebar Styling */
-        aside#sidebar {
-          font-size: 1rem;
-        }
-
-        aside#sidebar .profile-pic {
-          max-width: 220px !important;
-          width: 100% !important;
-          height: auto !important;
-          border-radius: 8px;
-          display: block;
-          margin: 0 auto 1em;
-        }
-
-        aside#sidebar p {
-            font-size: 0.95em;
-            line-height: 1.5;
-            text-align: center;
-        }
-
-        aside#sidebar .sidebar-buttons img,
-        aside#sidebar .social-badges img {
-            margin-bottom: 0.5em;
-        }
-    </style>
   
   </head>
 
@@ -86,17 +31,7 @@
  
 
  
-    {% if page.layout == 'home' %}
- 
-    <div id="banner-placeholder" style="height: 100vh; display: flex; justify-content: center; align-items: center;">
- 
-      <div class="spinner"></div>
- 
-    </div>
- 
-    <div id="cityscape-canvas-container" style="display: none;"></div>
- 
-    {% endif %}
+    {% if page.url == '/' %}
  
 
  
@@ -107,17 +42,11 @@
         <section id="main-content">
  
           <h1>
- 
-            {% if page.layout == 'home' %}
- 
+            {% if page.url == '/' %}
               {{ site.title }}
- 
             {% else %}
- 
               <a href="/">/Home</a>
- 
             {% endif %}
- 
           </h1>
  
           {{ content }}
@@ -168,7 +97,7 @@
  
 
  
-    {% if page.layout == 'home' %}
+	{% if page.url == '/' %}
  
     <script>
  
@@ -180,11 +109,6 @@
  
         var canvasContainer = document.getElementById('cityscape-canvas-container');
  
-        
- 
-        // Assuming the canvas is ready after a short delay.
- 
-        // A more robust solution would use a callback from the p5.js sketch
  
         setTimeout(function() {
  
@@ -248,11 +172,11 @@
  
         function createCityscape() {
  
-            buildingData = []; // Clear old data
+            buildingData = []; 
  
-            const buildingWidths = [70, 90, 110, 80, 100]; // Pool of thinner fixed widths
+            const buildingWidths = [70, 90, 110, 80, 100]; 
  
-            const clockTowerWidth = 120; // Thinner clock tower
+            const clockTowerWidth = 120;
  
 
  
@@ -266,7 +190,7 @@
  
 
  
-            // 1. Place the Clock Tower in the absolute center of the canvas
+            // Place the Clock Tower in the center of the canvas
  
             const clockTowerX = (p.width - clockTowerWidth) / 2;
  
@@ -283,8 +207,7 @@
             });
  
 
- 
-            // 2. Generate buildings to the right, stopping at the 70% boundary
+            //  Generate buildings to the right, stopping at the 70% boundary
  
             let currentX = clockTowerX + clockTowerWidth;
  
@@ -299,8 +222,6 @@
                 }
  
                 if (newWidth < 40) break;
- 
-
  
                 let newHeight = p.random(150, 320);
  
@@ -321,8 +242,7 @@
             }
  
 
- 
-            // 3. Generate buildings to the left, stopping at the 70% boundary
+            // Generate buildings to the left, stopping at the 70% boundary
  
             currentX = clockTowerX;
  
@@ -370,7 +290,7 @@
  
             p.resizeCanvas(p.windowWidth, p.windowHeight);
  
-            createCityscape(); // Re-create the city with new dimensions
+            createCityscape(); 
  
         }
  
