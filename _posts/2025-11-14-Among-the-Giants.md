@@ -8,16 +8,17 @@ Making this game has been my go-to relaxing pastime this past month. And I don't
 
 Among the Giants is an exploration game where we play as Park Ranger Gail, performing daily tasks in a California redwood national park, accompanied by our  squirrel companion, Oakley. The game focuses on atmosphere, education, and the quiet beauty of nature.
 
-The coastal redwoods are the tallest and some of the oldest trees in the world. A magical place, but only existing in northern California, so not many get to visit them
+The coastal redwoods are the tallest and some of the oldest trees in the world. A magical place, but only existing in northern California, so not many get to visit them.  
 Interesting things to explore:
 ### The ranger hut.
 ![Ranger Hut](/TemplateData/among-the-giants-ranger-hut.jpg)
 I tried my best to fill the hut with interesting items one might find in a park ranger hut.
 ### The Mark Twain Tree replica.
 ![The mark Twain Tree](/TemplateData/among-the-giants-mark-twain-tree.jpg)
-A replica of a trunk slice that I don't think exists anymore. It's now immortalized in the game.
+This replica represents a slab from the Mark Twain Tree, a healthy giant sequoia that stood for over a millennium in what is now Kings Canyon National Park.
+In 1891, the tree was felled for exhibition. It took a team of men 13 days to saw through the 16-foot-diameter trunk, a feat intended to astonish crowds in Eastern cities who did not believe trees could grow so large. 
 ### Poetry walk
-On the trail, we find real poems from the  **Simpson Reed Poetry Walk 2024.**
+On the trail, we find poems from the  **Simpson Reed Poetry Walk 2024.**
 ### The wildlife
 Besides our squirrel friend Oakley, there are some animals wandering around. They're re shy, but you might get a better look with binoculars. Deep in the woods, the bears are aggressive.
 ### Butterfly Habitat
